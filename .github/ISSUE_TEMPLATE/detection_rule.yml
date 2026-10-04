@@ -1,0 +1,27 @@
+name: Detection rule request
+description: Propose a focused deterministic detection rule.
+title: "rule: "
+labels: [rule-pack]
+body:
+  - type: markdown
+    attributes:
+      value: Do not submit live secrets or harmful payloads. Use safe, redacted examples.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Behavior to detect
+      description: Explain the threat and its expected severity.
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Safe positive and negative examples
+      description: Include examples that should and should not match.
+    validations:
+      required: true
+  - type: input
+    id: references
+    attributes:
+      label: References
+      description: Optional public research or advisory links.

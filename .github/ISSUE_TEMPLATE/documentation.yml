@@ -1,0 +1,15 @@
+name: Documentation issue
+description: Report missing, stale, or unclear documentation.
+title: "docs: "
+labels: [documentation]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is unclear or incorrect?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Suggested improvement

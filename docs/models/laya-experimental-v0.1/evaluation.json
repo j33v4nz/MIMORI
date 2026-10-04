@@ -1,0 +1,102 @@
+{
+  "scope": "synthetic held-out template families; not an independent security benchmark",
+  "samples": 45,
+  "dataset_sha256": "574574a04fc2e505adaacbd6ced63321981e310a01b8a5873332ed36ecb3d12f",
+  "verdict_accuracy": 0.6444444444444445,
+  "classes": {
+    "benign": {
+      "support": 9,
+      "precision": 0.6666666666666666,
+      "recall": 0.4444444444444444,
+      "f1": 0.5333333333333333
+    },
+    "suspicious": {
+      "support": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "malicious": {
+      "support": 31,
+      "precision": 0.7575757575757576,
+      "recall": 0.8064516129032258,
+      "f1": 0.78125
+    }
+  },
+  "categories": {
+    "data_exfiltration": {
+      "support": 5,
+      "precision": 1.0,
+      "recall": 0.6
+    },
+    "encoding_evasion": {
+      "support": 4,
+      "precision": null,
+      "recall": 0.0
+    },
+    "excessive_agency": {
+      "support": 7,
+      "precision": 0.3333333333333333,
+      "recall": 0.5714285714285714
+    },
+    "instruction_override": {
+      "support": 7,
+      "precision": 0.5555555555555556,
+      "recall": 0.7142857142857143
+    },
+    "jailbreak_persona": {
+      "support": 2,
+      "precision": 1.0,
+      "recall": 0.5
+    },
+    "none": {
+      "support": 14,
+      "precision": 0.5384615384615384,
+      "recall": 0.5
+    },
+    "system_prompt_extraction": {
+      "support": 4,
+      "precision": 0.0,
+      "recall": 0.0
+    },
+    "threat": {
+      "support": 2,
+      "precision": 0.0,
+      "recall": 0.0
+    }
+  },
+  "benign_false_positive_rate": 0.3333333333333333,
+  "benign_nonbenign_rate": 0.5555555555555556,
+  "auto_detect_at_0_9": {
+    "flagged": 0,
+    "precision": null,
+    "malicious_recall": 0.0
+  },
+  "brier_score": 0.5443530617777778,
+  "expected_calibration_error": 0.13925111111111116,
+  "confusion_matrix": {
+    "malicious->malicious": 25,
+    "benign->benign": 4,
+    "benign->suspicious": 2,
+    "benign->malicious": 3,
+    "suspicious->malicious": 5,
+    "malicious->suspicious": 4,
+    "malicious->benign": 2
+  },
+  "latency_ms": {
+    "p50": 3704.6749000001,
+    "p95": 4762.456545009627,
+    "p99": 5529.743700986728
+  },
+  "hardware": {
+    "platform": "Linux-7.2.8-2-cachyos-x86_64-with-glibc2.44",
+    "processor": "12th Gen Intel Core i5-1235U",
+    "logical_cpus": 12,
+    "threads": 4,
+    "torch_version": "2.13.0+cpu",
+    "device": "cpu"
+  },
+  "engine": "laya_finetuned",
+  "heuristic_fallbacks": 0,
+  "latency_note": "Local experiment; separate strict HTTP smoke inference overlapped briefly. Not a controlled throughput or latency guarantee."
+}

@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible MIMORI defect.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Never include API keys, service-role keys, or unredacted telemetry.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. ...\n2. ...\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MIMORI version or commit
+  - type: dropdown
+    id: setup
+    attributes:
+      label: Setup
+      options: [Managed Supabase, Local Supabase, Other]

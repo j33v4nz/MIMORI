@@ -1,0 +1,94 @@
+{
+  "scope": "synthetic held-out template families; not an independent security benchmark",
+  "samples": 45,
+  "dataset_sha256": "574574a04fc2e505adaacbd6ced63321981e310a01b8a5873332ed36ecb3d12f",
+  "verdict_accuracy": 0.37777777777777777,
+  "classes": {
+    "benign": {
+      "support": 9,
+      "precision": 0.25,
+      "recall": 1.0,
+      "f1": 0.4
+    },
+    "suspicious": {
+      "support": 5,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "malicious": {
+      "support": 31,
+      "precision": 0.8888888888888888,
+      "recall": 0.25806451612903225,
+      "f1": 0.4
+    }
+  },
+  "categories": {
+    "data_exfiltration": {
+      "support": 5,
+      "precision": 1.0,
+      "recall": 0.6
+    },
+    "encoding_evasion": {
+      "support": 4,
+      "precision": null,
+      "recall": 0.0
+    },
+    "excessive_agency": {
+      "support": 7,
+      "precision": 0.25,
+      "recall": 0.42857142857142855
+    },
+    "instruction_override": {
+      "support": 7,
+      "precision": 0.6,
+      "recall": 0.8571428571428571
+    },
+    "jailbreak_persona": {
+      "support": 2,
+      "precision": 1.0,
+      "recall": 0.5
+    },
+    "none": {
+      "support": 14,
+      "precision": 0.5454545454545454,
+      "recall": 0.42857142857142855
+    },
+    "system_prompt_extraction": {
+      "support": 4,
+      "precision": 0.0,
+      "recall": 0.0
+    },
+    "threat": {
+      "support": 2,
+      "precision": 0.0,
+      "recall": 0.0
+    }
+  },
+  "benign_false_positive_rate": 0.0,
+  "brier_score": 0.6687042593333333,
+  "expected_calibration_error": 0.2217088888888889,
+  "confusion_matrix": {
+    "malicious->malicious": 8,
+    "malicious->benign": 23,
+    "benign->benign": 9,
+    "suspicious->benign": 4,
+    "suspicious->malicious": 1
+  },
+  "latency_ms": {
+    "p50": 4639.687659000629,
+    "p95": 5496.06347399822,
+    "p99": 5537.346165991039
+  },
+  "hardware": {
+    "platform": "Linux-7.2.8-2-cachyos-x86_64-with-glibc2.44",
+    "processor": "12th Gen Intel Core i5-1235U",
+    "threads": 4,
+    "torch_version": "2.13.0+cpu",
+    "device": "cpu"
+  },
+  "engine": "laya_finetuned",
+  "heuristic_fallbacks": 0,
+  "model_role": "unmodified original base checkpoint",
+  "latency_note": "Baseline inference overlapped head training. Do not compare baseline and candidate latency as a controlled benchmark."
+}

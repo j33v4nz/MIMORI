@@ -1,0 +1,11 @@
+#!/bin/sh
+# Optional full-checkout secret review before committing.
+# Enable with: git config core.hooksPath .githooks
+# Requires Python 3 and Gitleaks (or GITLEAKS_BIN).
+set -eu
+
+if git diff --cached --quiet; then
+  exit 0
+fi
+
+exec python3 scripts/release/check-secrets.py

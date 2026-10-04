@@ -1,0 +1,48 @@
+{
+  "base_model": "convaiinnovations/laya",
+  "base_revision": "7b928d828b7b0e022f929d9bd2e44165aa270148",
+  "method": "supervised decision-head fine-tuning; frozen encoder; cached features",
+  "seed": 42,
+  "epochs": 6,
+  "steps": 318,
+  "losses": [
+    1.3046247486798268,
+    1.2652205588682643,
+    1.2493346884565533,
+    1.2198967326362178,
+    1.1823376540867787,
+    1.13875782939623
+  ],
+  "seconds": 3652.19,
+  "temperature": [
+    1.4695312976837158,
+    1.4695312976837158,
+    1.4695312976837158
+  ],
+  "counts": {
+    "train": 210,
+    "calibration": 45,
+    "test": 45
+  },
+  "dataset_sha256": {
+    "train": "3fc6f4890b6305e8e734d9b6482866614736a9b9fecdd3cff368c837d066146e",
+    "calibration": "a55a50e7be313728bf883ca092a05eab53ce7c20c56e9fd04ed069d337ff21ff",
+    "test": "574574a04fc2e505adaacbd6ced63321981e310a01b8a5873332ed36ecb3d12f"
+  },
+  "experimental": true,
+  "learning_rate": 0.0001,
+  "batch_size": 8,
+  "threads": 4,
+  "torch_version": "2.13.0+cpu",
+  "total_state_values": 421293830,
+  "trained_parameters": 26248193,
+  "weight_verification": {
+    "frozen_encoder_and_action_head_unchanged": true,
+    "changed_trained_tensors": 31
+  },
+  "weights_sha256": "ae2d4fc9373b8443e1630baeb498f63dbcc982a0071664eb0ea4faf3b1bd3ea4",
+  "training_script_commit": "ddb5e0fb6171678f2934bf8c8941ca13ee3812a5",
+  "inference_source_commit": "d61c1851d5c2c886567ee6e8b0c0333532ee1662",
+  "export_configuration_adjustment": "Converted fitted scalar temperature into the three-element list required by Laya 0.3.26; weights unchanged.",
+  "dataset_note": "Exact archived splits and hashes are authoritative; generator ordering was made deterministic after these splits were generated."
+}

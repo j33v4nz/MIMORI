@@ -1,0 +1,74 @@
+{
+  "name": "mimori",
+  "version": "1.1.0",
+  "description": "Open-source observability, runtime guardrails, and security threat detection for AI agents",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j33v4nz/MIMORI.git"
+  },
+  "homepage": "https://github.com/j33v4nz/MIMORI",
+  "keywords": [
+    "ai-agents",
+    "agent-security",
+    "observability",
+    "llm-guardrails",
+    "prompt-injection",
+    "owasp-llm",
+    "telemetry"
+  ],
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:api-e2e": "vitest run app/__tests__/e2e-telemetry.test.ts",
+    "test:e2e": "playwright test",
+    "evaluate:attacks": "node scripts/evaluate-detections.mjs",
+    "setup": "node scripts/setup-local.mjs",
+    "demo": "node scripts/demo/telemetry.cjs",
+    "test:security-pipeline": "vitest run --config vitest.security.config.ts",
+    "test:auth": "playwright test --config playwright.auth.config.ts",
+    "check:database": "bash scripts/release/check-database.sh",
+    "check:distribution": "bash scripts/release/check-sdk-distribution.sh",
+    "check:secrets": "python scripts/release/check-secrets.py",
+    "check:npm-audit": "python scripts/release/check-npm-audit.py"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "lucide-react": "^1.23.0",
+    "next": "^16.3.8",
+    "pino": "^10.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zod": "^4.4.3"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "$postcss",
+      "sharp": "0.35.5"
+    }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "@types/node": "^20.14.9",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
+    "autoprefixer": "^10.5.2",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.11.1",
+    "eslint-config-next": "^16.3.8",
+    "eslint-plugin-react": "^7.37.5",
+    "postcss": "^8.5.20",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.9",
+    "ws": "^8.21.1"
+  }
+}

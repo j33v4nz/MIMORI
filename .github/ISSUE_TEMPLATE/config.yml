@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage and integration questions
+    url: https://github.com/j33v4nz/MIMORI/discussions
+    about: Ask about connecting your framework or custom runtime.
+  - name: Security vulnerability
+    url: https://github.com/j33v4nz/MIMORI/security/advisories/new
+    about: Do not report security vulnerabilities in public issues. Use GitHub Security Advisories instead.
