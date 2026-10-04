@@ -34,7 +34,7 @@ mimori = "mimori.cli:main"
 [project.optional-dependencies]
 langchain = ["langchain-core>=0.2.0,<2.0.0"]
 crewai = ["crewai>=1.15.3"]
-autogen = ["ag2>=0.14.0,<1.0.0"]
+autogen = ["ag2>=0.14.0,<2.0.0"]
 llama-index = ["llama-index-core>=0.10.0"]
 dspy = ["dspy>=2.5.0"]
 openai-agents = ["openai-agents>=0.1.0"]
