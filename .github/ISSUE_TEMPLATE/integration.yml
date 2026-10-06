@@ -1,0 +1,31 @@
+name: Framework or runtime integration
+description: Report adapter compatibility or missing telemetry from any runtime.
+title: "integration: "
+labels: [integration]
+body:
+  - type: input
+    id: framework
+    attributes:
+      label: Framework or custom runtime and version
+      placeholder: "CrewAI, AutoGen, custom Python, Node.js HTTP, etc."
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: MIMORI commit/version and Python or Node version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction and adapter hook
+      description: Remove keys, credentials, personal data, and customer traces.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and recorded events
+    validations:
+      required: true

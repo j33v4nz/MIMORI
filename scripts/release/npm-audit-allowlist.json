@@ -1,0 +1,17 @@
+{
+  "review_after": "2026-10-10",
+  "advisory": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+  "root_package": "braces",
+  "root_version": "3.0.3",
+  "severity": "high",
+  "dependency_graph": {
+    "@next/eslint-plugin-next": ["fast-glob"],
+    "braces": ["https://github.com/advisories/GHSA-vfj7-8cjw-p6xm"],
+    "chokidar": ["braces"],
+    "eslint-config-next": ["@next/eslint-plugin-next"],
+    "fast-glob": ["micromatch"],
+    "micromatch": ["braces"],
+    "tailwindcss": ["chokidar", "fast-glob", "micromatch"]
+  },
+  "reason": "The advisory has no patched release. It is reachable only through the development build and lint dependency graph; production audit must remain clean. Reassess this exception by the review date or as soon as braces publishes a fix."
+}

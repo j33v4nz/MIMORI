@@ -1,0 +1,53 @@
+# Example: gate releases on MIMORI behavior-diff.
+#
+# Copy this file into your service repo (or keep it here and trigger it with
+# repository_dispatch / workflow_call), then set the MIMORI_API_URL and
+# MIMORI_API_KEY secrets plus the MIMORI_BASELINE_SESSION /
+# CANDIDATE_SESSION_ID variables for the two recorded sessions you want to
+# compare. The job is skipped when MIMORI_BASELINE_SESSION is not configured.
+#
+# Manual-only (workflow_dispatch): this gate needs recorded session IDs, so it
+# does not run on pull_request events.
+#
+# Fails the workflow when the candidate introduces high-risk behavior.
+# Use `--fail-on review` to also fail on material (non-risky) changes.
+
+name: MIMORI behavior diff
+
+on:
+  workflow_dispatch:
+    inputs:
+      baseline:
+        description: "Baseline session record ID"
+        required: true
+      candidate:
+        description: "Candidate session record ID"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  behavior-diff:
+    name: Behavior-diff gate
+    runs-on: ubuntu-latest
+    # Skip on repositories without a configured baseline session.
+    if: vars.MIMORI_BASELINE_SESSION != ''
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install MIMORI SDK
+        run: python -m pip install mimori-sdk
+
+      - name: Compare candidate vs baseline
+        env:
+          MIMORI_API_URL: ${{ secrets.MIMORI_API_URL }}
+          MIMORI_API_KEY: ${{ secrets.MIMORI_API_KEY }}
+        run: |
+          mimori diff \
+            --baseline "${{ inputs.baseline || vars.MIMORI_BASELINE_SESSION }}" \
+            --candidate "${{ inputs.candidate || vars.CANDIDATE_SESSION_ID }}" \
+            --fail-on high_risk

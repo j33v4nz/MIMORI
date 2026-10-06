@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: MIMORI Ingestion API
+  version: 1.1.0
+  description: API for ingesting AI agent telemetry into MIMORI.
+servers:
+  - url: http://localhost:3000
+    description: Default local server
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      description: Use the API key provided in the MIMORI Dashboard under API Keys.
+  schemas:
+    IngestPayload:
+      type: object
+      required:
+        - agent_name
+        - events
+      properties:
+        agent_name:
+          type: string
+          description: The name of the agent generating the telemetry.
+        session_id:
+          type: string
+          description: A unique identifier for the execution session.
+        framework:
+          type: string
+          description: Optional string indicating the framework used (e.g., LangChain, CrewAI).
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    Event:
+      type: object
+      required:
+        - event_type
+        - sequence_number
+        - payload
+      properties:
+        event_type:
+          type: string
+          enum:
+            - llm_start
+            - llm_end
+            - tool_start
+            - tool_end
+            - chain_start
+            - chain_end
+            - agent_action
+            - manual
+        sequence_number:
+          type: integer
+          description: Monotonically increasing counter for events within this session.
+        payload:
+          type: object
+          description: JSON object containing event specifics (e.g., prompt, tool input).
+        timestamp:
+          type: string
+          format: date-time
+          description: UTC timestamp in ISO 8601 format.
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/ingest/event:
+    post:
+      summary: Ingest telemetry events
+      description: Accepts a batch of telemetry events for a specific agent session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestPayload'
+      responses:
+        '202':
+          description: Events accepted and queued for processing.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted:
+                    type: integer
+                    description: Number of events accepted.
+                  session_id:
+                    type: string
+                    description: External session identifier.
+                  session_record_id:
+                    type: string
+                    description: Internal session record UUID.
+                  immediate_detections:
+                    type: array
+                    items:
+                      type: object
+                    description: Detections triggered by the deterministic rules engine.
+                  skipped:
+                    type: array
+                    items:
+                      type: object
+                    description: Events that failed validation (only present if any were skipped).
+        '400':
+          description: Bad request (validation error).
+        '401':
+          description: Unauthorized (missing or invalid API key).
+        '429':
+          description: Too many requests (rate limited).

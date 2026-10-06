@@ -1,0 +1,3 @@
+# Upstream MetaGPT 0.8.2 pins unavailable lancedb==0.4.0. This override is
+# solely for the isolated Action smoke test; LanceDB/RAG compatibility is untested.
+lancedb==0.30.0

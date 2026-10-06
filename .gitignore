@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Build output
+.next/
+/.next-*/
+out/
+dist/
+build/
+tsconfig.tsbuildinfo
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Private planning
+.private/
+scripts/laya/data/
+scripts/laya/checkpoint/
+*.safetensors
+/AGENTS.md
+/CLAUDE.md
+/MIMORI-DEMO.mp4
+.agents/
+.hermes/
+FINAL_PRODUCT.md
+latest.md
+claude.md
+fetch_stats.mjs
+website/
+/ui/
+
+# Misc
+*.pem
+*.db
+
+# Test Artifacts
+.pytest_cache/
+playwright-report/
+test-results/
+tmp-demo/
+
+# Benchmark runs and data
+docs/benchmarks/
+

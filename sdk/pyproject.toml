@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mimori-sdk"
+version = "1.1.0"
+description = "Python SDK for sending AI agent telemetry to MIMORI"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Jeevan George", email = "jeevangeorgech@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = ["requests>=2.31.0,<3.0.0"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+]
+
+[project.urls]
+Homepage = "https://github.com/j33v4nz/MIMORI"
+Repository = "https://github.com/j33v4nz/MIMORI"
+Issues = "https://github.com/j33v4nz/MIMORI/issues"
+
+[project.scripts]
+mimori = "mimori.cli:main"
+
+[project.optional-dependencies]
+langchain = ["langchain-core>=0.2.0,<2.0.0"]
+crewai = ["crewai>=1.15.3"]
+autogen = ["ag2>=0.14.0,<2.0.0"]
+llama-index = ["llama-index-core>=0.10.0"]
+dspy = ["dspy>=2.5.0"]
+openai-agents = ["openai-agents>=0.1.0"]
+smolagents = ["smolagents>=1.0.0"]
+pydantic-ai = ["pydantic-ai>=0.1.0"]
+langgraph = ["langgraph>=0.2.0,<2.0.0", "langchain-core>=0.2.0,<2.0.0"]
+google-adk = ["google-adk>=1.0.0"]
+semantic-kernel = ["semantic-kernel>=1.0.0"]
+haystack = ["haystack-ai>=3.0.0"]
+agno = ["agno>=1.0.0"]
+composio = ["composio>=0.6.0"]
+anthropic = ["anthropic>=0.40.0"]
+laya = ["requests>=2.31.0,<3.0.0"]
+metagpt = ["metagpt>=0.8.0"]
+dev = ["black>=24.0.0", "pytest>=8.0.0", "pytest-cov>=4.0.0", "responses>=0.25.0", "anyio>=4.0.0"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.setuptools.packages.find]
+include = ["mimori*"]
+
+[tool.setuptools.package-data]
+mimori = ["py.typed", "*.js"]
