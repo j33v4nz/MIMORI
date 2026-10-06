@@ -1,9 +1,0 @@
-{
-  "dataset": ".private/laya-task-v0.3/data-final",
-  "exact_benchmark_text_overlap": {
-    "train": 0,
-    "calibration": 0,
-    "test": 0
-  },
-  "limits": "Exact text check only; conceptual patterns remain shared."
-}
