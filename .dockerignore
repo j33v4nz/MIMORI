@@ -1,0 +1,12 @@
+.env*
+!.env.example
+.git
+node_modules
+.next
+.private
+test-results
+playwright-report
+docs/benchmarks
+.venv*
+__pycache__
+*.pyc

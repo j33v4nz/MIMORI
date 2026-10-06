@@ -1,0 +1,5 @@
+laya==0.3.26
+transformers==5.18.0
+safetensors==0.8.0
+huggingface-hub==1.33.0
+torch>=2.6,<3
