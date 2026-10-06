@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense, type ReactNode } from "react";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 import { getCachedUser } from "./lib/db/server";
 import { AppShell } from "./components/app-shell";
@@ -8,9 +8,9 @@ import "./globals.css";
 import { computeVigilance } from "./lib/vigilance";
 import { getOverviewStats } from "./lib/dashboard/queries";
 
-const brickSans = localFont({
-  src: "../public/fonts/NTBrickSans.ttf",
-  variable: "--font-brick",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -59,7 +59,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${brickSans.variable} light`}
+      className={`${inter.variable} light`}
       suppressHydrationWarning
     >
       <head>

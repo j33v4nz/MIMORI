@@ -1,6 +1,6 @@
 # Release verification scope
 
-Earlier development evidence, October 4, 2026: both [release CI](https://github.com/j33v4nz/MIMORIii/actions/runs/37193583163) and [native integrations](https://github.com/j33v4nz/MIMORIii/actions/runs/37193583151) passed at `d61c185` in the archived development repository: 25 jobs total.
+Earlier development evidence, October 4, 2026: both [release CI](https://github.com/j33v4nz/MIMORI/actions/runs/37193583163) and [native integrations](https://github.com/j33v4nz/MIMORI/actions/runs/37193583151) passed at `d61c185` in the archived development repository: 25 jobs total.
 
 The fresh public repository starts with the `v1` release. Its exact source must
 pass its own [CI](https://github.com/j33v4nz/MIMORI/actions/workflows/ci.yml) and

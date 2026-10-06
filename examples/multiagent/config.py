@@ -4,7 +4,7 @@ import os
 import uuid
 
 MIMORI_API_KEY = os.environ.get(
-    "MIMORI_DEV_API_KEY", "mmr_dev_8f5b7afa23a14b798f3acb1106acc374"
+    "MIMORI_DEV_API_KEY", ""
 )
 MIMORI_API_URL = os.environ.get("MIMORI_API_URL", "http://localhost:3000")
 
