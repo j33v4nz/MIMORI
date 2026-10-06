@@ -51,7 +51,7 @@ DEFAULT_GUARDRAIL_RULES: tuple[GuardrailRule, ...] = (
         pattern=re.compile(
             # The -rf flag matcher uses bounded quantifiers so adversarial
             # input like "-rrrrr...r" cannot trigger catastrophic backtracking.
-            r"(\brm\s+(-[a-zA-Z]{0,64}r[a-zA-Z]{0,64}f[a-zA-Z]{0,64}|--recursive|--force)\s+[/~.]|\bmkfs\.[a-z0-9]+|\bchmod\s+-R\s+777|\bdd\s+if=/dev/(zero|urandom)|\bnc\s+-e\s+/bin/sh|/bin/(bash|sh)\s+-i)",
+            r"(\brm\s+(-[a-zA-Z]{0,64}r[a-zA-Z]{0,64}f[a-zA-Z]{0,64}|-[a-zA-Z]{0,64}f[a-zA-Z]{0,64}r[a-zA-Z]{0,64}|-r\s+-f|-f\s+-r|--recursive|--force)\s+(--\s+)?[/~.]|\bmkfs\.[a-z0-9]+|\bchmod\s+-R\s+777|\bdd\s+if=/dev/(zero|urandom)|\bnc\s+-e\s+/bin/sh|/bin/(bash|sh)\s+-i)",
             re.IGNORECASE,
         ),
         category="excessive_agency",
@@ -101,7 +101,7 @@ DEFAULT_GUARDRAIL_RULES: tuple[GuardrailRule, ...] = (
     GuardrailRule(
         name="Cloud Metadata & Internal SSRF",
         pattern=re.compile(
-            r"\b(169\.254\.169\.254|169\.254\.169\.253|metadata\.google\.internal|instance-data|localhost:2375|127\.0\.0\.1:2375|0\.0\.0\.0)\b",
+            r"\b(169\.254\.169\.254|169\.254\.169\.253|metadata\.google\.internal|instance-data|localhost:2375|127\.0\.0\.1:2375)\b|\b(?:https?|wss?)://0\.0\.0\.0(?=[:/?#\s]|$)",
             re.IGNORECASE,
         ),
         category="threat",
@@ -156,7 +156,7 @@ DEFAULT_GUARDRAIL_RULES: tuple[GuardrailRule, ...] = (
     GuardrailRule(
         name="Jailbreak Persona",
         pattern=re.compile(
-            r"\b(DAN|do anything now|developer mode|jailbreak)\b",
+            r"\b(you\s+are\s+(now\s+)?DAN|act\s+as\s+DAN|do anything now|(?:enable|activate|enter|switch\s+to)\s+developer mode|(?:perform|attempt|start)\s+(a\s+)?jailbreak)\b",
             re.IGNORECASE,
         ),
         category="jailbreak_persona",
@@ -166,7 +166,7 @@ DEFAULT_GUARDRAIL_RULES: tuple[GuardrailRule, ...] = (
     GuardrailRule(
         name="System Prompt Extraction",
         pattern=re.compile(
-            r"(system prompt|reveal.{0,200}instructions|repeat.{0,200}verbatim|show.{0,200}system.{0,200}prompt|disclose.{0,200}system.{0,200}instructions|print.{0,200}system.{0,200}prompt)",
+            r"(what\s+is\s+your\s+system\s+prompt|reveal.{0,200}instructions|repeat.{0,200}verbatim|show.{0,200}system.{0,200}prompt|disclose.{0,200}system.{0,200}instructions|print.{0,200}system.{0,200}prompt)",
             re.IGNORECASE,
         ),
         category="system_prompt_extraction",
@@ -693,7 +693,76 @@ class MIMORIGuardrail:
             )
         return verdict
 
-    def protect_tool(self, func: Callable[..., Any]) -> Callable[..., Any]:
+    def evaluate_tool_response(
+        self, content: Any, *, user_request: str, reviewer: Callable[..., GuardrailVerdict], tool_name: str = ""
+    ) -> GuardrailVerdict:
+        """Review external data before an agent reads it.
+
+        ``user_request`` must come from application state, never be extracted
+        from the tool result. Semantic review is mandatory for this explicit
+        boundary, including responses that contain no regex matches. Review
+        failure blocks instead of silently falling back to keyword matching.
+        This method returns a verdict; use verify_tool_response to enforce it.
+        """
+        try:
+            _bounded_content_text(content)
+            if not isinstance(user_request, str) or not user_request.strip():
+                raise ValueError("Original user request is required")
+            verdict = reviewer(content, user_request=user_request, tool_name=tool_name)
+            if not isinstance(verdict, GuardrailVerdict) or type(verdict.allowed) is not bool:
+                raise ValueError("Invalid reviewer verdict")
+            if verdict.allowed and verdict.category != "benign":
+                raise ValueError("Reviewer allowed a non-benign result")
+        except Exception:
+            # Do not put provider errors or private tool contents into logs.
+            verdict = GuardrailVerdict(allowed=False, category="evaluation_limit", severity="high",
+                                      reason="Tool response could not be securely reviewed")
+        if verdict.is_violation:
+            if self.on_violation:
+                self.on_violation(verdict)
+            if self.mode in {"warn", "audit"}:
+                logger.warning("MIMORI tool-response review %s: %s", self.mode.upper(), verdict.category)
+        return verdict
+
+    def verify_tool_response(
+        self, content: Any, *, user_request: str, reviewer: Callable[..., GuardrailVerdict], tool_name: str = ""
+    ) -> GuardrailVerdict:
+        """Raise before unsafe or unreviewed content reaches an agent in block mode."""
+        verdict = self.evaluate_tool_response(content, user_request=user_request, reviewer=reviewer, tool_name=tool_name)
+        if verdict.is_violation and self.mode == "block":
+            raise SecurityViolation("MIMORI blocked untrusted tool response: " + verdict.reason,
+                                    category=verdict.category, severity=verdict.severity)
+        return verdict
+
+    def protect_tool_result(
+        self, func: Callable[..., Any], *, user_request: str, reviewer: Callable[..., GuardrailVerdict]
+    ) -> Callable[..., Any]:
+        """Wrap a read tool so its output is reviewed before returning to the agent.
+
+        The read itself executes; this does not authorize side effects. Use
+        protect_tool with a trusted authorization callback for action tools.
+        In warn/audit modes content is returned after logging the verdict.
+        """
+        if inspect.iscoroutinefunction(func):
+            @functools.wraps(func)
+            async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
+                import asyncio
+                result = await func(*args, **kwargs)
+                await asyncio.to_thread(self.verify_tool_response, result, user_request=user_request,
+                                        reviewer=reviewer, tool_name=func.__name__)
+                return result
+            return async_wrapper
+
+        @functools.wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            result = func(*args, **kwargs)
+            self.verify_tool_response(result, user_request=user_request, reviewer=reviewer, tool_name=func.__name__)
+            return result
+        return wrapper
+
+    def protect_tool(
+        self, func: Callable[..., Any], *, authorize: Callable[..., bool] | None = None
+    ) -> Callable[..., Any]:
         """Decorator to wrap a tool function with pre-execution guardrail checks.
 
         In ``block`` mode a violating call raises :class:`SecurityViolation`
@@ -703,9 +772,27 @@ class MIMORIGuardrail:
         """
         guard = self
 
+        def check_authorization(args: tuple[Any, ...], kwargs: dict[str, Any]) -> None:
+            if authorize is None:
+                return
+            try:
+                # Only explicit True grants permission; truthy data is not authority.
+                approved = authorize(*args, **kwargs) is True
+            except Exception:
+                approved = False
+            if not approved:
+                verdict = GuardrailVerdict(allowed=False, category="excessive_agency", severity="high",
+                                          reason="Tool call is outside application-granted authorization")
+                if guard.on_violation:
+                    guard.on_violation(verdict)
+                if guard.mode == "block":
+                    raise SecurityViolation(verdict.reason, category=verdict.category, severity=verdict.severity)
+                logger.warning("MIMORI authorization %s: %s", guard.mode.upper(), func.__name__)
+
         if inspect.iscoroutinefunction(func):
             @functools.wraps(func)
             async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
+                check_authorization(args, kwargs)
                 verdict = guard.evaluate({"args": args, "kwargs": kwargs})
                 if not verdict.allowed:
                     if guard.mode == "block":
@@ -720,6 +807,7 @@ class MIMORIGuardrail:
 
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
+            check_authorization(args, kwargs)
             # Check all positional and keyword arguments
             verdict = guard.evaluate({"args": args, "kwargs": kwargs})
             if not verdict.allowed:

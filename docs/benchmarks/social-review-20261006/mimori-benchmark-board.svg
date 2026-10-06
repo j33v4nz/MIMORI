@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="3000" viewBox="0 0 2400 3000">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#081321"/><stop offset="1" stop-color="#12223A"/></linearGradient></defs>
+<rect width="2400" height="3000" fill="url(#bg)"/>
+<text x="80" y="100" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="58" font-weight="700" text-anchor="start">MIMORI</text>
+<rect x="1820" y="60" width="500" height="64" rx="24" fill="#1D334A" stroke="#2A415B" stroke-width="2"/>
+<text x="2070" y="104" fill="#CCE0F7" font-family="Fira Sans, sans-serif" font-size="28" font-weight="600" text-anchor="middle">LOCAL CPU  /  06 OCT 2026</text>
+<text x="80" y="231" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="108" font-weight="700" text-anchor="start">Security benchmark</text>
+<text x="80" y="299" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="37" font-weight="400" text-anchor="start">InjecAgent subset + authored challenges · task-aware tool-response review</text>
+<text x="80" y="348" fill="#8FAECF" font-family="Fira Sans, sans-serif" font-size="29" font-weight="600" text-anchor="start">103 INPUTS    /    70 ATTACKS    /    33 BENIGN    /    FROZEN INPUTS + SOURCES</text>
+<rect x="80" y="395" width="1096" height="394" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="452" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="32" font-weight="600" text-anchor="start">WITHOUT LAYA · LLAMA REVIEW</text>
+<text x="118" y="489" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">ATTACK RECALL</text>
+<text x="118" y="632" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="164" font-weight="700" text-anchor="start">85.7%</text>
+<text x="760" y="580" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="60" font-weight="600" text-anchor="start">60/70</text>
+<text x="760" y="632" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="30" font-weight="400" text-anchor="start">attacks caught</text>
+<text x="118" y="711" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">3.0%</text>
+<text x="118" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">FALSE POSITIVE RATE</text>
+<text x="465" y="711" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">98.4%</text>
+<text x="465" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">PRECISION</text>
+<text x="820" y="711" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">89.3%</text>
+<text x="820" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">ACCURACY</text>
+<rect x="1224" y="395" width="1096" height="394" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="1262" y="452" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="32" font-weight="600" text-anchor="start">WITH LAYA · INDEPENDENT OR</text>
+<text x="1262" y="489" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">ATTACK RECALL</text>
+<text x="1262" y="632" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="164" font-weight="700" text-anchor="start">85.7%</text>
+<text x="1904" y="580" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="60" font-weight="600" text-anchor="start">60/70</text>
+<text x="1904" y="632" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="30" font-weight="400" text-anchor="start">attacks caught</text>
+<text x="1262" y="711" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">6.1%</text>
+<text x="1262" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">FALSE POSITIVE RATE</text>
+<text x="1609" y="711" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">96.8%</text>
+<text x="1609" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">PRECISION</text>
+<text x="1964" y="711" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="49" font-weight="600" text-anchor="start">88.3%</text>
+<text x="1964" y="758" fill="#A8BED8" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="start">ACCURACY</text>
+<rect x="80" y="819" width="2240" height="77" rx="18" fill="#2D2B25" stroke="#6B5B3F" stroke-width="2"/>
+<text x="1200" y="869" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="35" font-weight="500" text-anchor="middle">Laya added 0 caught attacks and 1 extra benign false positive on this regression.</text>
+<rect x="80" y="931" width="2240" height="591" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="993" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="39" font-weight="600" text-anchor="start">01 / Layer-by-layer comparison</text>
+<text x="2280" y="993" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="end">SAME 70 ATTACK + 33 BENIGN INPUTS</text>
+<text x="118" y="1068" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="start">PROFILE</text>
+<text x="960" y="1068" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="middle">RECALL</text>
+<text x="1260" y="1068" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="middle">CAUGHT</text>
+<text x="1690" y="1068" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="middle">BENIGN BLOCKED</text>
+<text x="2150" y="1068" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="600" text-anchor="middle">F1</text>
+<path d="M118 1092 L2280 1092" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="1143" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">SDK regex only</text>
+<text x="960" y="1143" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">0.0%</text>
+<text x="1260" y="1143" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">0/70</text>
+<text x="1690" y="1143" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">2/33  (6.1%)</text>
+<text x="2150" y="1143" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">0.0%</text>
+<text x="118" y="1200" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Laya v0.3 only</text>
+<text x="960" y="1200" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">1.4%</text>
+<text x="1260" y="1200" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">1/70</text>
+<text x="1690" y="1200" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">1/33  (3.0%)</text>
+<text x="2150" y="1200" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">2.8%</text>
+<text x="118" y="1257" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Llama semantic review</text>
+<text x="960" y="1257" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">85.7%</text>
+<text x="1260" y="1257" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">60/70</text>
+<text x="1690" y="1257" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">1/33  (3.0%)</text>
+<text x="2150" y="1257" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">91.6%</text>
+<text x="118" y="1314" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Llama + Laya / OR</text>
+<text x="960" y="1314" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">85.7%</text>
+<text x="1260" y="1314" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">60/70</text>
+<text x="1690" y="1314" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">2/33  (6.1%)</text>
+<text x="2150" y="1314" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">90.9%</text>
+<text x="118" y="1371" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Regex + Llama / OR</text>
+<text x="960" y="1371" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">85.7%</text>
+<text x="1260" y="1371" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">60/70</text>
+<text x="1690" y="1371" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">3/33  (9.1%)</text>
+<text x="2150" y="1371" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">90.2%</text>
+<text x="118" y="1428" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Regex + Llama + Laya / OR</text>
+<text x="960" y="1428" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">85.7%</text>
+<text x="1260" y="1428" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">60/70</text>
+<text x="1690" y="1428" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">4/33  (12.1%)</text>
+<text x="2150" y="1428" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="33" font-weight="500" text-anchor="middle">89.6%</text>
+<text x="118" y="1490" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="27" font-weight="400" text-anchor="start">Combined profiles are offline OR replays. Task-aware SDK review does not apply raw regex.</text>
+<rect x="80" y="1560" width="1096" height="429" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="1621" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="38" font-weight="600" text-anchor="start">02 / Public + authored slices</text>
+<text x="118" y="1705" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">InjecAgent base subset</text>
+<text x="1120" y="1705" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="43" font-weight="600" text-anchor="end">52/62</text>
+<text x="118" y="1747" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="25" font-weight="400" text-anchor="start">83.9% recall · one selected context per public attack instruction</text>
+<text x="118" y="1806" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Derived ordinary outputs</text>
+<text x="1120" y="1806" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="43" font-weight="600" text-anchor="end">0/17 FP</text>
+<text x="118" y="1848" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="25" font-weight="400" text-anchor="start">17 benign controls obtained by removing the injection slot</text>
+<text x="118" y="1907" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="32" font-weight="500" text-anchor="start">Authored attack challenges</text>
+<text x="1120" y="1907" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="43" font-weight="600" text-anchor="end">8/8</text>
+<text x="118" y="1949" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="25" font-weight="400" text-anchor="start">16 authored benign examples: 1 false positive</text>
+<rect x="1224" y="1560" width="1096" height="429" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="1262" y="1621" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="38" font-weight="600" text-anchor="start">03 / Full static regex test</text>
+<text x="1262" y="1692" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="23" font-weight="600" text-anchor="start">PACK</text>
+<text x="1600" y="1692" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="23" font-weight="600" text-anchor="middle">BASE /1,054</text>
+<text x="1920" y="1692" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="23" font-weight="600" text-anchor="middle">ENHANCED /1,054</text>
+<text x="2250" y="1692" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="23" font-weight="600" text-anchor="middle">FP /17</text>
+<text x="1262" y="1758" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="31" font-weight="500" text-anchor="start">New-org</text>
+<text x="1600" y="1758" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">17</text>
+<text x="1920" y="1758" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">1,054</text>
+<text x="2250" y="1758" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">0</text>
+<text x="1262" y="1818" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="31" font-weight="500" text-anchor="start">Fallback</text>
+<text x="1600" y="1818" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">0</text>
+<text x="1920" y="1818" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">1,054</text>
+<text x="2250" y="1818" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">0</text>
+<text x="1262" y="1878" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="31" font-weight="500" text-anchor="start">SDK regex</text>
+<text x="1600" y="1878" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">0</text>
+<text x="1920" y="1878" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">1,054</text>
+<text x="2250" y="1878" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="34" font-weight="500" text-anchor="middle">0</text>
+<text x="1262" y="1935" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="26" font-weight="400" text-anchor="start">Enhanced cases contain a direct override prefix.</text>
+<text x="1262" y="1970" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="24" font-weight="400" text-anchor="start">62 instructions × 17 contexts; base/enhanced are paired.</text>
+<rect x="80" y="2026" width="2240" height="432" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="2089" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="39" font-weight="600" text-anchor="start">04 / Actual Laya v0.3 training</text>
+<rect x="1902" y="2050" width="379" height="55" rx="12" fill="#332D25" stroke="#6B5B3F" stroke-width="2"/>
+<text x="2091" y="2086" fill="#FFD28A" font-family="Fira Sans, sans-serif" font-size="24" font-weight="600" text-anchor="middle">RESEARCH CANDIDATE</text>
+<text x="118" y="2160" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="31" font-weight="400" text-anchor="start">192 train · 96 calibration · 96 held-out</text>
+<text x="118" y="2214" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="31" font-weight="400" text-anchor="start">26.2M head parameters · frozen encoder</text>
+<text x="118" y="2268" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="31" font-weight="400" text-anchor="start">4 epochs / 192 steps · selected epoch 3</text>
+<text x="118" y="2314" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="31" font-weight="400" text-anchor="start">144 retained updates · 33.6 minutes on CPU</text>
+<path d="M120.0 2351.0 L336.7 2376.7 L553.3 2399.2 L770.0 2417.7" fill="none" stroke="#7AE9C5" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="120.0" cy="2351.0" r="5" fill="#7AE9C5"/>
+<circle cx="336.7" cy="2376.7" r="5" fill="#7AE9C5"/>
+<circle cx="553.3" cy="2399.2" r="5" fill="#7AE9C5"/>
+<circle cx="770.0" cy="2417.7" r="5" fill="#7AE9C5"/>
+<path d="M120.0 2370.8 L336.7 2384.9 L553.3 2388.7 L770.0 2372.7" fill="none" stroke="#79BAFF" stroke-width="4" stroke-linejoin="round"/>
+<circle cx="120.0" cy="2370.8" r="5" fill="#79BAFF"/>
+<circle cx="336.7" cy="2384.9" r="5" fill="#79BAFF"/>
+<circle cx="553.3" cy="2388.7" r="5" fill="#79BAFF"/>
+<circle cx="770.0" cy="2372.7" r="5" fill="#79BAFF"/>
+<text x="120.0" y="2446" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="22" font-weight="500" text-anchor="middle">1</text>
+<text x="336.66666666666663" y="2446" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="22" font-weight="500" text-anchor="middle">2</text>
+<text x="553.3333333333333" y="2446" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="22" font-weight="500" text-anchor="middle">3*</text>
+<text x="770.0" y="2446" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="22" font-weight="500" text-anchor="middle">4</text>
+<text x="830" y="2383" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="24" font-weight="400" text-anchor="start">Training loss</text>
+<text x="830" y="2418" fill="#79BAFF" font-family="Fira Sans, sans-serif" font-size="24" font-weight="400" text-anchor="start">Calibration loss</text>
+<text x="1210" y="2160" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="28" font-weight="600" text-anchor="start">SYNTHETIC HELD-OUT ATTACK RECALL</text>
+<text x="1210" y="2264" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="91" font-weight="600" text-anchor="start">20.0%</text>
+<text x="1628" y="2264" fill="#79BAFF" font-family="Fira Sans, sans-serif" font-size="83" font-weight="500" text-anchor="start">→</text>
+<text x="1800" y="2264" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="91" font-weight="600" text-anchor="start">32.5%</text>
+<text x="1210" y="2315" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="30" font-weight="400" text-anchor="start">v0.2 · 8/40</text>
+<text x="1800" y="2315" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="30" font-weight="400" text-anchor="start">v0.3 · 13/40</text>
+<text x="1210" y="2364" fill="#7AE9C5" font-family="Fira Sans, sans-serif" font-size="30" font-weight="400" text-anchor="start">0/48 benign false positives for both</text>
+<text x="1210" y="2411" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="26" font-weight="400" text-anchor="start">Separate calibration thresholds · no test tuning</text>
+<rect x="80" y="2494" width="2240" height="208" rx="24" fill="#14253A" stroke="#2A415B" stroke-width="2"/>
+<text x="118" y="2552" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="38" font-weight="600" text-anchor="start">05 / Runtime + evidence</text>
+<text x="118" y="2602" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="32" font-weight="400" text-anchor="start">Llama 3.1 8B · Q4_K_M · Ollama 0.32.5 · Intel i5-1235U · CPU only</text>
+<text x="118" y="2650" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="31" font-weight="400" text-anchor="start">LLM p50 15.44s / p95 23.47s  ·  Laya p50 2.08s / p95 3.83s</text>
+<text x="118" y="2690" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="27" font-weight="400" text-anchor="start">LLM + Laya p50 17.48s / p95 27.14s (offline summed estimate) · 0 review errors</text>
+<text x="80" y="2755" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="29" font-weight="400" text-anchor="start">Scanner dev checks: 12/20 → 20/20 authored signatures caught; 0/16 benign false positives.</text>
+<text x="80" y="2803" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="29" font-weight="400" text-anchor="start">Capability audit: 1,054/1,054 proposed chains contain a denied tool; 17/17 original calls allowed.</text>
+<text x="80" y="2844" fill="#91B0D2" font-family="Fira Sans, sans-serif" font-size="26" font-weight="400" text-anchor="start">Capability counts use fixture grants and dataset tool labels; no live agent attack-success score.</text>
+<path d="M80 2870 L2320 2870" stroke="#2A415B" stroke-width="2"/>
+<text x="80" y="2917" fill="#F4F8FD" font-family="Fira Sans, sans-serif" font-size="28" font-weight="600" text-anchor="start">LOCAL DETECTOR EVALUATION · Previously inspected regression · Not official InjecAgent ASR</text>
+<text x="80" y="2960" fill="#B8CAE0" font-family="Fira Sans, sans-serif" font-size="26" font-weight="400" text-anchor="start">No agent attacks executed. Positive = suspicious/malicious; errors never count as catches. Source: InjecAgent f19c9f2.</text>
+</svg>

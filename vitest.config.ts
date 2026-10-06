@@ -5,6 +5,8 @@ export default defineConfig({
     environment: 'node',
     setupFiles: ['./vitest.setup.ts'],
     exclude: [
+      '.private/**',
+      '.next/**',
       'tests/e2e/**',
       '**/__tests__/e2e-*.test.ts',
       '**/node_modules/**',

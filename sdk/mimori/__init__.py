@@ -4,6 +4,9 @@ from mimori.client import MIMORIClient
 from mimori.handler import MIMORIHandler
 from mimori.manual import log_event
 from mimori.guardrail import MIMORIGuardrail, SecurityViolation, GuardrailVerdict, LayaClassifier
+from mimori.semantic import OllamaSecurityReviewer
+from mimori.laya_security import LayaSecurityReviewer, LayeredSecurityReviewer
+from mimori.capabilities import ToolCapabilityPolicy
 
 __version__ = "1.1.0"
 
@@ -14,6 +17,10 @@ __all__ = [
     "SecurityViolation",
     "GuardrailVerdict",
     "LayaClassifier",
+    "OllamaSecurityReviewer",
+    "LayaSecurityReviewer",
+    "LayeredSecurityReviewer",
+    "ToolCapabilityPolicy",
     "__version__",
     "log_event",
     "MIMORICrewAIHandler",

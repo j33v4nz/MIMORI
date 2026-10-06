@@ -59,3 +59,10 @@ website/
 playwright-report/
 test-results/
 tmp-demo/
+
+# Intermediate benchmark scratch runs
+docs/benchmarks/run-*/
+docs/benchmarks/injecagent*/
+docs/benchmarks/llm-regex-*/
+docs/benchmarks/*-local/
+docs/benchmarks/laya-task-v0.2/

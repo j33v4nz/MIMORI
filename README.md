@@ -33,6 +33,29 @@ See the [integration matrix](docs/integrations.md) for install extras, adapter s
 
 **[Watch the 72-second silent walkthrough](docs/demo-video/MIMORI-fast-silent-demo.mp4).** This example uses a real local Llama 3.1 agent through LangChain with synthetic fintech tools. The same ingestion, findings, dashboard, and comparison services accept telemetry from the other integration paths above. No money is moved and no SQL is executed. [Demo details](docs/demo-video/README.md).
 
+## Security benchmark: defense-in-depth
+
+Prompt injection cannot be solved with a single regex or a single classifier. MIMORI enforces **layered defense-in-depth** across three complementary boundaries:
+
+1. **Zero-Latency Pattern Scanner:** Catches explicit instruction-override prefixes in `<0.05ms`.
+2. **Task-Aware Semantic Review:** Intercepts indirect prompt injections inside third-party tool responses (web pages, PDFs, API data) relative to user intent before agent ingestion (85.7% recall, 98.4% precision).
+3. **Deterministic Capability Sandboxing:** Mathematical least-privilege boundary at tool execution. Even if an injection slips past all text classifiers, unauthorized tool calls are physically blocked.
+
+<p align="center">
+  <img src="docs/benchmarks/social-review-20261006/mimori-frontier-benchmark.png" alt="MIMORI Security Benchmark" width="900" />
+</p>
+
+| Benchmark & Capability Suite | MIMORI (Full Stack) | Llama 3.1 (Semantic Alone) | Regex Scanner |
+| :--- | :---: | :---: | :---: |
+| **InjecAgent 1.0 (Indirect Injection)** | **• 85.7%** | 85.7% | 0.0% |
+| **InjecAgent Enhanced (Direct Overrides)** | **• 100%** | 85.7% | 100% |
+| **Tool Capability Sandbox Containment** | **• 100%** (1,054/1,054) | — | — |
+| **Authored Adversarial Challenges** | **• 100%** | 100% | 0.0% |
+| **Benign Tool Specificity (1 - FPR)** | **• 97.0%** | 97.0% | 93.9% |
+| **Runtime Execution Reliability** | **• 100%** (0 errors) | 100% | 100% |
+
+*Tested on frozen InjecAgent regression (`uiuc-kang-lab/InjecAgent`, rev `f19c9f2c`) with local CPU inference. See the [Full Benchmark Review](docs/benchmarks/social-review-20261006/full-review.md) and [Tool Response Security Guide](docs/tool-response-security.md).*
+
 ## What you can do
 
 - Record model, chain, and tool events exposed by your integration.

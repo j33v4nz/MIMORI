@@ -6,6 +6,7 @@
 - Next.js server routes use `SUPABASE_SERVICE_ROLE_KEY` for ingestion, API-key management, and asynchronous judge work. This key must never reach the client.
 - Supabase RLS restricts authenticated dashboard reads to organization membership. Explicit Data API grants expose only the tables required by the application; RLS remains the authorization layer.
 - The ingestion API accepts a MIMORI API key and stores the submitted telemetry. It observes and detects behavior but does not block an agent action.
+- Opt-in SDK tool-response wrappers review content against application-owned task state before the agent consumes it. Task capability policies and authorization callbacks gate tool execution independently of model verdicts. [Configuration and limits](tool-response-security.md).
 - Local LLM judge mode sends payloads to a local Ollama-compatible endpoint. Cloud judge mode sends payloads to the configured provider and requires its API key as a server-side environment variable.
 
 ## Authentication and authorization
@@ -18,6 +19,7 @@
 
 - Telemetry payloads are wrapped in separately generated `<<<MIMORI_<random-id>_UNTRUSTED_DATA>>>` opening/closing delimiters. Instructions explicitly treat enclosed content as untrusted; this separation does not guarantee prompt-injection resistance.
 - Classification instructions are placed in the `system` message role, separate from the untrusted user content.
+- Unmatched tool responses are queued for judge review even without attack keywords; a confident Laya result cannot suppress that queue. Asynchronous review still requires a configured worker and budget and does not block actions.
 - LLM error messages are sanitized (`sanitizeErrorMessage()`) before storage in `llm_judge_jobs` to prevent API keys, URLs, internal addresses, and tokens from leaking into the database.
 - Settings and judge routes use the RLS-scoped server client instead of the service-role client.
 

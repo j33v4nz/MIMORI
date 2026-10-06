@@ -26,7 +26,31 @@ const REDOS_PATTERNS = [
 ];
 
 function hasRedosRisk(pattern: string): boolean {
-  return REDOS_PATTERNS.some((re) => re.test(pattern));
+  if (REDOS_PATTERNS.some((re) => re.test(pattern))) return true;
+  // Reject repeated alternation even when branches hide in nested groups:
+  // (a|aa)+ and (?:(?:a)|aa)+ can both backtrack exponentially. Escaped
+  // punctuation and character classes are literals, not group structure.
+  const groups = [{ alternation: false, repetition: false }];
+  let inClass = false;
+  for (let i = 0; i < pattern.length; i++) {
+    const char = pattern[i];
+    if (char === "\\") { i++; continue; }
+    if (char === "[") { inClass = true; continue; }
+    if (char === "]" && inClass) { inClass = false; continue; }
+    if (inClass) continue;
+    const current = groups[groups.length - 1];
+    if (char === "(") groups.push({ alternation: false, repetition: false });
+    else if (char === "|") current.alternation = true;
+    else if (char === ")" && groups.length > 1) {
+      const group = groups.pop()!;
+      const repeated = /[+*{]/.test(pattern[i + 1] ?? "");
+      if (repeated && (group.alternation || group.repetition)) return true;
+      const parent = groups[groups.length - 1];
+      parent.alternation ||= group.alternation;
+      parent.repetition ||= group.repetition || repeated;
+    } else if (char === "+" || char === "*" || char === "{") current.repetition = true;
+  }
+  return false;
 }
 
 export function compileRules(rules: Rule[]): CompiledRule[] {
@@ -64,6 +88,11 @@ const SEVERITY_CONFIDENCE: Record<Severity, number> = {
   low: 0.5
 };
 
+const WORD_LOOKALIKES: Record<string, string> = {
+  "а": "a", "е": "e", "і": "i", "о": "o", "с": "c", "р": "p",
+  "х": "x", "у": "y", "ѕ": "s", "ι": "i"
+};
+
 export function payloadToSearchText(payload: Record<string, unknown>): string {
   const seen = new WeakSet();
   try {
@@ -87,7 +116,40 @@ export function detectWithRules(
   rules: CompiledRule[],
   searchText?: string
 ): RuleDetection[] {
-  const text = (searchText ?? payloadToSearchText(payload)).slice(0, 100000);
+  // Scan bounded overlapping windows, including the tail. JSON serialization
+  // escapes newlines, so also inspect each original string value separately.
+  // An explicit override remains the sole input (used for SDK signal markers).
+  const text = searchText ?? payloadToSearchText(payload);
+  const sources = [text.toLowerCase()];
+  if (searchText === undefined) {
+    try {
+      const pending: unknown[] = [JSON.parse(text)];
+      while (pending.length) {
+        const value = pending.pop();
+        if (typeof value === "string") sources.push(value);
+        else if (value && typeof value === "object") {
+          for (const child of Object.values(value)) pending.push(child);
+        }
+      }
+    } catch { /* Serialization fallback remains searchable. */ }
+  }
+  const windows = (value: string): string[] => {
+    const result: string[] = [];
+    for (let start = 0; start < value.length; start += 95904) {
+      result.push(value.slice(start, start + 100000));
+    }
+    return result;
+  };
+  const raw = sources.flatMap(windows);
+  // Normalize words only: changing digits or punctuation can manufacture
+  // secret/IP/command matches. Keep those categories on the raw views.
+  const wordCategories = new Set(["instruction_override", "jailbreak_persona", "system_prompt_extraction"]);
+  const normalized = sources.flatMap((value) => [false, true].flatMap((spaces) => windows(
+    value.normalize("NFKC").toLowerCase()
+      .replace(/[\u00ad\u034f\u2060\u200b-\u200f\ufeff]/g, spaces ? " " : "")
+      .replace(/[аеіосрхуѕι]/g, (letter) => WORD_LOOKALIKES[letter])
+      .replace(/\s+/g, " ")
+  )));
   const detections: RuleDetection[] = [];
 
   for (const rule of rules) {
@@ -97,9 +159,15 @@ export function detectWithRules(
 
     let matched = false;
     if (rule.pattern_type === "keyword" && rule.lowerKeyword) {
-      matched = text.includes(rule.lowerKeyword);
+      matched = raw.some((view) => view.includes(rule.lowerKeyword!));
+      if (!matched && wordCategories.has(rule.category)) {
+        matched = normalized.some((view) => view.includes(rule.lowerKeyword!));
+      }
     } else if (rule.pattern_type === "regex" && rule.compiledPattern) {
-      matched = rule.compiledPattern.test(text);
+      matched = raw.some((view) => rule.compiledPattern!.test(view));
+      if (!matched && wordCategories.has(rule.category)) {
+        matched = normalized.some((view) => rule.compiledPattern!.test(view));
+      }
     }
 
     if (matched) {

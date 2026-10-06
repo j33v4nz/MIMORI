@@ -467,6 +467,29 @@ if not verdict.allowed:
     print(f"Blocked: {verdict.reason}")
 ```
 
+### Tool-response review and task authorization
+
+For indirect prompt injection, review external content against the original task before the agent reads it. The opt-in semantic path reviews every response and blocks failed reviews in block mode:
+
+```python
+from mimori import MIMORIGuardrail, OllamaSecurityReviewer
+
+guard = MIMORIGuardrail(mode="block")
+reviewer = OllamaSecurityReviewer(model="llama3.1:latest", timeout=120)  # Local model must be installed.
+guard.verify_tool_response(
+    tool_output,
+    user_request=original_user_request,  # From trusted application task state.
+    reviewer=reviewer,
+    tool_name="read_page",
+)
+```
+
+Use `protect_tool_result` to review a read tool's return value, and `protect_tool(..., authorize=...)` or `ToolCapabilityPolicy` to check action permissions before execution. A semantic allow decision does not authorize a new action. LangChain and LangGraph handlers accept opt-in review and authorization configuration; telemetry-only use retains its existing behavior. See [setup, examples, and measured limits](../docs/tool-response-security.md).
+
+`LayeredSecurityReviewer(semantic=reviewer, laya=LayaSecurityReviewer())` optionally adds the experimental local Laya checkpoint. It requires real model inference, refuses heuristic fallback, and keeps semantic review mandatory. Either layer may block; failures are evaluation errors. Benchmark recall, false positives and latency before enabling it. See [Laya setup and the independent-layer comparison](../docs/tool-response-security.md#add-the-experimental-laya-layer).
+
+For a task-aware checkpoint, use `LayaSecurityReviewer.from_policy(path)` with its calibration policy. This requires matching task schema, complete context and the calibrated checkpoint's weights hash. See [task-aware training, calibration and local serving](../docs/laya-task-training.md).
+
 ### Laya-Enhanced Guardrails
 
 Enable the optional [Laya](https://github.com/NandhaKishorM/laya) classifier for an additional signal beyond regex. Model scores are not validated or calibrated for your workload; evaluate the model before using its output to block wrapped operations.
