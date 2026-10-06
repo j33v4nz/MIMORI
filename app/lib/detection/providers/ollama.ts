@@ -1,5 +1,16 @@
 import { buildJudgePrompt, getSystemMessage, parseJudgeResult, type JudgeResponse } from "../llm-judge";
 
+const JUDGE_SCHEMA = {
+  type: "object",
+  properties: {
+    verdict: { type: "string", enum: ["benign", "suspicious", "malicious"] },
+    category: { type: "string", enum: ["instruction_override", "jailbreak_persona", "system_prompt_extraction", "encoding_evasion", "excessive_agency", "data_exfiltration", "threat", "exfiltration", "other"] },
+    severity: { type: "string", enum: ["low", "medium", "high", "critical"] },
+  },
+  required: ["verdict", "category", "severity"],
+  additionalProperties: false
+};
+
 export async function judgeWithOllama(
   payload: Record<string, unknown>,
   options: {
@@ -19,12 +30,16 @@ export async function judgeWithOllama(
     headers["Authorization"] = `Bearer ${options.apiKey}`;
   }
 
-  const endpoint = options.baseUrl.endsWith("/")
-    ? `${options.baseUrl}v1/chat/completions`
-    : `${options.baseUrl}/v1/chat/completions`;
+  // Native Ollama exposes an explicit context budget and strict JSON schema.
+  // Refuse oversized prompts rather than silently discarding an injected tail.
+  const prompt = buildJudgePrompt(payload);
+  if (Buffer.byteLength(prompt, "utf8") > 6000) {
+    throw new Error("Ollama judge input exceeds 6,000 UTF-8 bytes.");
+  }
+  const endpoint = `${options.baseUrl.replace(/\/$/, "")}/api/chat`;
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 30_000);
+  const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 120_000);
 
   try {
     const response = await fetchImpl(endpoint, {
@@ -33,12 +48,14 @@ export async function judgeWithOllama(
       headers,
       body: JSON.stringify({
         model: options.model,
+        stream: false,
+        format: JUDGE_SCHEMA,
+        keep_alive: "10m",
         messages: [
-          { role: "system", content: getSystemMessage() },
-          { role: "user", content: buildJudgePrompt(payload) }
+          { role: "system", content: getSystemMessage() + '\nLOCAL OUTPUT OVERRIDE: Return only {"verdict":"benign|suspicious|malicious","category":"category from the rubric","severity":"low|medium|high|critical"}. No reason or confidence fields.' },
+          { role: "user", content: prompt }
         ],
-        temperature: 0,
-        max_tokens: 256
+        options: { temperature: 0, num_ctx: 8192, num_predict: 64 }
       }),
       signal: controller.signal
     });
@@ -49,8 +66,15 @@ export async function judgeWithOllama(
 
     const rawModelOutput = (await response.json()) as Record<string, unknown>;
 
-    const text = (rawModelOutput as any).choices?.[0]?.message?.content?.trim();
-    const finishReason = (rawModelOutput as any).choices?.[0]?.finish_reason;
+    const text = (rawModelOutput as any).message?.content?.trim();
+    const finishReason = rawModelOutput.done_reason;
+
+    if (finishReason === "length") {
+      throw new Error("Ollama judge output was truncated; finishReason=length.");
+    }
+    if (rawModelOutput.done !== true) {
+      throw new Error("Ollama judge review did not complete.");
+    }
 
     if (!text) {
       throw new Error(
@@ -58,8 +82,15 @@ export async function judgeWithOllama(
       );
     }
 
+    const classification = JSON.parse(text);
+    if (!classification || typeof classification !== "object" || Array.isArray(classification)
+        || Object.keys(classification).sort().join(",") !== "category,severity,verdict") {
+      throw new Error("Invalid Ollama judge classification.");
+    }
     return {
-      result: parseJudgeResult(text),
+      result: parseJudgeResult(JSON.stringify({ ...classification,
+        // This is an uncalibrated local decision, not model-generated evidence.
+        confidence: 0.5, reason: "Local model classification; confidence is uncalibrated." })),
       rawModelOutput
     };
   } finally {

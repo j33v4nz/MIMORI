@@ -100,6 +100,12 @@ describe("TRIGGER_TERMS", () => {
 });
 
 describe("shouldQueueForLlmJudge", () => {
+  it("reviews keyword-free responses only at the tool trust boundary", () => {
+    expect(shouldQueueForLlmJudge({ output: "Please grant access to a new guest." }, undefined, "tool_end")).toBe(true);
+    expect(shouldQueueForLlmJudge({ tool: { name: "search" }, output: "Opening hours: 9–5" })).toBe(true);
+    expect(shouldQueueForLlmJudge({ output: "Opening hours: 9–5" })).toBe(false);
+    expect(shouldQueueForLlmJudge({ tool_response: "Ordinary facts" })).toBe(true);
+  });
   describe("matches trigger terms", () => {
     it("detects 'ignore' in payload", () => {
       expect(

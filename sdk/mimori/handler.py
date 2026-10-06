@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
+import logging
 
 from mimori.client import MIMORIClient
+from mimori.guardrail import MIMORIGuardrail, GuardrailVerdict, SecurityViolation
+
+logger = logging.getLogger("MIMORI")
 
 try:
     from langchain_core.callbacks import BaseCallbackHandler
@@ -27,8 +31,23 @@ class MIMORIHandler(BaseCallbackHandler):
         batch_size: int = 25,
         max_queue_size: int = 1000,
         timeout: float = 2.0,
+        guardrail: MIMORIGuardrail | None = None,
+        original_user_request: str | None = None,
+        tool_response_reviewer: Callable[..., GuardrailVerdict] | None = None,
+        tool_authorizer: Callable[[str, str], bool] | None = None,
     ) -> None:
         super().__init__()
+        if guardrail is not None and (not original_user_request or tool_response_reviewer is None):
+            raise ValueError("Blocking tool review requires an original user request and reviewer")
+        if guardrail is None and (tool_response_reviewer is not None or tool_authorizer is not None):
+            raise ValueError("A guardrail is required for review or authorization")
+        self.guardrail = guardrail
+        self.original_user_request = original_user_request
+        self.tool_response_reviewer = tool_response_reviewer
+        self.tool_authorizer = tool_authorizer
+        self._tool_names: dict[str, str] = {}
+        # LangChain otherwise catches callback exceptions and continues.
+        self.raise_error = guardrail is not None and guardrail.mode == "block"
         self.client = MIMORIClient(
             api_key=api_key,
             agent_name=agent_name,
@@ -93,15 +112,37 @@ class MIMORIHandler(BaseCallbackHandler):
                 "kwargs": kwargs,
             },
         )
+        if self.guardrail is not None:
+            name = serialized.get("name", "unknown_tool")
+            if self.tool_authorizer is not None:
+                try:
+                    approved = self.tool_authorizer(name, input_str) is True
+                except Exception:
+                    approved = False
+                if not approved:
+                    verdict = GuardrailVerdict(allowed=False, category="excessive_agency", severity="high",
+                                              reason="Tool call is outside application-granted authorization")
+                    if self.guardrail.on_violation:
+                        self.guardrail.on_violation(verdict)
+                    if self.guardrail.mode == "block":
+                        raise SecurityViolation(verdict.reason, category=verdict.category, severity=verdict.severity)
+                    logger.warning("MIMORI authorization %s: denied tool call", self.guardrail.mode.upper())
+            self.guardrail.verify_or_raise({"tool": serialized, "input": input_str})
+            self._tool_names[str(kwargs.get("run_id", "default"))] = name
 
     def on_tool_end(self, output: Any, **kwargs: Any) -> None:
+        safe_output = _safe_response(output)
         self.client.log(
             "tool_end",
             {
-                "output": _safe_response(output),
+                "output": safe_output,
                 "kwargs": kwargs,
             },
         )
+        if self.guardrail is not None:
+            name = self._tool_names.pop(str(kwargs.get("run_id", "default")), "unknown_tool")
+            self.guardrail.verify_tool_response(safe_output, user_request=self.original_user_request or "",
+                                               reviewer=self.tool_response_reviewer, tool_name=name)
 
     def on_chain_start(
         self,
@@ -146,6 +187,7 @@ class MIMORIHandler(BaseCallbackHandler):
         )
 
     def on_tool_error(self, error: BaseException, **kwargs: Any) -> None:
+        self._tool_names.pop(str(kwargs.get("run_id", "default")), None)
         self.client.log(
             "tool_end",
             {

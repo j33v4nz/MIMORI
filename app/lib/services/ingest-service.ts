@@ -168,7 +168,7 @@ async function persistEvents(
       }),
       { onConflict: "session_id,sequence_number", ignoreDuplicates: true }
     )
-    .select("id, sequence_number, payload, created_at");
+    .select("id, sequence_number, payload, created_at, event_type");
 
   if (error || !data) {
     logger.error({ err: error?.message }, "[persistEvents] failed");

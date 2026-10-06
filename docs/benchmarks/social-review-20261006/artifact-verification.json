@@ -1,0 +1,25 @@
+{
+  "exports": [
+    {
+      "file": "mimori-benchmark-board.png",
+      "dimensions": [
+        2400,
+        3000
+      ],
+      "png_valid": true,
+      "pdf_valid_header": true
+    },
+    {
+      "file": "mimori-benchmark-wide.png",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "png_valid": true,
+      "pdf_valid_header": true
+    }
+  ],
+  "source_hashes_match": true,
+  "sdk_smoke_passed": true,
+  "profile_counts_checked": true
+}

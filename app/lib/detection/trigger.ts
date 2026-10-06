@@ -102,7 +102,15 @@ export const TRIGGER_TERMS = [
   "counterfeit"
 ];
 
-export function shouldQueueForLlmJudge(payload: Record<string, unknown>, searchText?: string) {
+/** Tool results cross a trust boundary even when no attack keywords occur. */
+export function isToolResponse(payload: Record<string, unknown>, eventType?: string): boolean {
+  if (eventType === "tool_end" || eventType === "tool_result") return true;
+  return Object.hasOwn(payload, "tool_response") ||
+    (Object.hasOwn(payload, "output") && (Object.hasOwn(payload, "tool") || payload.source === "tool"));
+}
+
+export function shouldQueueForLlmJudge(payload: Record<string, unknown>, searchText?: string, eventType?: string) {
+  if (isToolResponse(payload, eventType)) return true;
   const text = searchText ?? payloadToSearchText(payload);
 
   return TRIGGER_TERMS.some((term) => text.includes(term));

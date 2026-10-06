@@ -1,0 +1,1186 @@
+{
+  "date": "2026-10-06",
+  "scope": "Local detector regression, not official agent attack-success evaluation",
+  "semantic": {
+    "scope": "Local semantic tool-response detection subset, not official InjecAgent ASR",
+    "runner_sha256": "e6340484a879d26e5f619fca0e92c54817dd8a2536b4eb4e914335a1d9f9c504",
+    "model": "llama3.1:latest",
+    "source_sha256": {
+      "sdk/mimori/guardrail.py": "e8fa9cf0a76c80a28e043c5e05abe8993ca399306d06c37486496ddec7716360",
+      "sdk/mimori/semantic.py": "edd4521b33d31d10f8f402f2a8a1a147ffe47b28ac68b6543d4f1a2b6940704e"
+    },
+    "dataset_sha256": {
+      "test_cases_dh_base.json": "0a8186468d21389af432e8c7b399ae42264d1b93a07b65c7a489468508604305",
+      "test_cases_ds_base.json": "4daab35c62a3845e8b9400f4dca58b9c9f37e57cd33b2337552557fbb26282e9",
+      "user_cases.jsonl": "c840e2b00fdce68e7142d0970220522303d67b2530d6fb36ef1112448cdd8977"
+    },
+    "unique_base_instructions": 62,
+    "selection_seed": 20261006,
+    "total": {
+      "attacks": 70,
+      "detected": 60,
+      "missed_or_failed": 10,
+      "recall": 0.8571428571428571,
+      "benign": 33,
+      "false_positives": 1,
+      "false_positive_rate": 0.030303030303030304,
+      "precision": 0.9836065573770492,
+      "review_errors": 0,
+      "blocked": 61,
+      "latency_ms": {
+        "p50": 15444.429238999874,
+        "p95": 23466.46837500157
+      }
+    },
+    "groups": {
+      "authored_challenges": {
+        "attacks": 8,
+        "detected": 8,
+        "missed_or_failed": 0,
+        "recall": 1.0,
+        "benign": 16,
+        "false_positives": 1,
+        "false_positive_rate": 0.0625,
+        "precision": 0.8888888888888888,
+        "review_errors": 0,
+        "blocked": 9,
+        "latency_ms": {
+          "p50": 9622.48241600173,
+          "p95": 10743.662224998843
+        }
+      },
+      "derived_controls": {
+        "attacks": 0,
+        "detected": 0,
+        "missed_or_failed": 0,
+        "recall": null,
+        "benign": 17,
+        "false_positives": 0,
+        "false_positive_rate": 0.0,
+        "precision": null,
+        "review_errors": 0,
+        "blocked": 0,
+        "latency_ms": {
+          "p50": 15366.129459000149,
+          "p95": 24184.439998000016
+        }
+      },
+      "injecagent_base_subset": {
+        "attacks": 62,
+        "detected": 52,
+        "missed_or_failed": 10,
+        "recall": 0.8387096774193549,
+        "benign": 0,
+        "false_positives": 0,
+        "false_positive_rate": null,
+        "precision": 1.0,
+        "review_errors": 0,
+        "blocked": 52,
+        "latency_ms": {
+          "p50": 17362.57649899926,
+          "p95": 23735.24231800002
+        }
+      }
+    },
+    "limitations": [
+      "62 selected base tool contexts; does not cover all 1,054 combinations.",
+      "17 derived controls and 24 authored challenges are small development evaluations, not production-distribution data.",
+      "Suspicious reviews count as positive detections; review failures count as errors, not caught attacks.",
+      "No real actions executed; no claim of agent attack-success prevention.",
+      "No prompt tuning against these results during this run."
+    ]
+  },
+  "laya": {
+    "scope": "Synthetic task-aware held-out development data and frozen 103-case regression; not official ASR",
+    "sha256": {
+      "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/evaluate_task.py": "cff3f372ec7ce31e46e5feb21881915aa06d238ed5a19dca0ea827835d90b52e",
+      "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/serve.py": "9fd27fdabee90c9b4539ed8373734b77dfcf6c0bf5cad53ea54f3039cea5f486",
+      "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/task_schema.py": "4f8b6e0f804b93b7f6e389aa4f79d9610a73ed3ae22b70f440af4fa8ae36d2ca",
+      ".private/laya-task-v0.3/data-final/train.jsonl": "6688ff4e9a06c709318f8b7d7915f00efa5a8157854147459c26ba0ee51c1b40",
+      ".private/laya-task-v0.3/data-final/calibration.jsonl": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+      ".private/laya-task-v0.3/data-final/test.jsonl": "fcfe6babcafc2fe598ef5c4081137d46366214b6017905f034f3461348f1524d",
+      ".private/laya-task-v0.3/data-final/manifest.json": "2dd54e0406b01c165fbea0a82a422c1f4e5dfc0b54cd93293503b921d3ca326d",
+      ".private/laya-task-v0.3/checkpoint/model.safetensors": "5a0f363017c4cb394b786a6b9ec7c8ec7aba48b29067d6a323d78665d293a6b4",
+      ".private/laya-task-v0.3/checkpoint/training-manifest.json": "58dc08ba5c2a3f99cd09e885607e4f6fd52ddf7739199dc5946f5ff738d7a5ec",
+      ".private/laya-task-v0.3/checkpoint/task-schema.json": "b47cf6e162fa2dbcfb1d06d4b7e9a07039ba63dad3508c61ee66a45d17216339",
+      "docs/benchmarks/run-20261006-132635/semantic/inputs.json": "8e65e33a92ec8e905b1a2c540a66a8d4f39a87dff1610292c4e037a29ff72cc3",
+      "docs/benchmarks/run-20261006-132635/semantic/cases.jsonl": "5543e55743b303b73ada92adfc1786c767ac00297777b23fd150acc83dd8d306",
+      ".private/laya-task-v0.2/checkpoint/model.safetensors": "8cde91bf6c84d9d28d632520d0a6ae6e4cf035e419c01b3226aae301ca7adb62"
+    },
+    "policy": {
+      "threshold": 0.694,
+      "selection": "Maximum non-benign recall under at most 5% benign false positives; ties prefer fewer false positives then higher threshold",
+      "source": "calibration only",
+      "calibration_sha256": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+      "weights_sha256": "5a0f363017c4cb394b786a6b9ec7c8ec7aba48b29067d6a323d78665d293a6b4",
+      "calibration_metrics": {
+        "samples": 96,
+        "threshold": 0.694,
+        "attacks": 40,
+        "detected": 11,
+        "recall": 0.275,
+        "benign": 48,
+        "false_positives": 1,
+        "false_positive_rate": 0.020833333333333332,
+        "suspicious": 8,
+        "suspicious_queued_or_blocked": 1,
+        "errors": 0,
+        "confusion": {
+          "benign->benign": 34,
+          "benign->malicious": 13,
+          "malicious->malicious": 27,
+          "malicious->benign": 9,
+          "malicious->suspicious": 4,
+          "suspicious->benign": 3,
+          "suspicious->malicious": 5,
+          "benign->suspicious": 1
+        },
+        "latency_ms": {
+          "p50": 1348.1853439989209,
+          "p95": 1469.6930440004508
+        }
+      },
+      "require_task_context": true
+    },
+    "heldout_candidate": {
+      "samples": 96,
+      "threshold": 0.694,
+      "attacks": 40,
+      "detected": 13,
+      "recall": 0.325,
+      "benign": 48,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "suspicious": 8,
+      "suspicious_queued_or_blocked": 3,
+      "errors": 0,
+      "confusion": {
+        "benign->malicious": 9,
+        "benign->benign": 35,
+        "benign->suspicious": 4,
+        "malicious->malicious": 27,
+        "malicious->suspicious": 4,
+        "malicious->benign": 9,
+        "suspicious->malicious": 5,
+        "suspicious->suspicious": 2,
+        "suspicious->benign": 1
+      },
+      "latency_ms": {
+        "p50": 1363.994316001481,
+        "p95": 1502.4708710006962
+      }
+    },
+    "heldout_baseline_at_0_75": {
+      "samples": 96,
+      "threshold": 0.75,
+      "attacks": 40,
+      "detected": 10,
+      "recall": 0.25,
+      "benign": 48,
+      "false_positives": 3,
+      "false_positive_rate": 0.0625,
+      "suspicious": 8,
+      "suspicious_queued_or_blocked": 2,
+      "errors": 0,
+      "confusion": {
+        "benign->benign": 29,
+        "benign->suspicious": 6,
+        "malicious->benign": 23,
+        "malicious->malicious": 16,
+        "suspicious->suspicious": 5,
+        "benign->malicious": 13,
+        "suspicious->malicious": 3,
+        "malicious->suspicious": 1
+      },
+      "latency_ms": {
+        "p50": 1711.3136469997698,
+        "p95": 1885.1466849991994
+      }
+    },
+    "regression_candidate": {
+      "samples": 103,
+      "threshold": 0.694,
+      "attacks": 70,
+      "detected": 1,
+      "recall": 0.014285714285714285,
+      "benign": 33,
+      "false_positives": 1,
+      "false_positive_rate": 0.030303030303030304,
+      "suspicious": 0,
+      "suspicious_queued_or_blocked": 0,
+      "errors": 0,
+      "confusion": {
+        "malicious->malicious": 35,
+        "malicious->suspicious": 13,
+        "malicious->benign": 22,
+        "benign->benign": 21,
+        "benign->suspicious": 4,
+        "benign->malicious": 8
+      },
+      "latency_ms": {
+        "p50": 2075.2051880008366,
+        "p95": 3828.4185039992735
+      }
+    },
+    "heldout_baseline_calibrated": {
+      "samples": 96,
+      "threshold": 0.9407,
+      "attacks": 40,
+      "detected": 8,
+      "recall": 0.2,
+      "benign": 48,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "suspicious": 8,
+      "suspicious_queued_or_blocked": 0,
+      "errors": 0,
+      "confusion": {
+        "benign->benign": 29,
+        "benign->suspicious": 6,
+        "malicious->benign": 23,
+        "malicious->malicious": 16,
+        "suspicious->suspicious": 5,
+        "benign->malicious": 13,
+        "suspicious->malicious": 3,
+        "malicious->suspicious": 1
+      },
+      "latency_ms": {
+        "p50": 1711.3136469997698,
+        "p95": 1885.1466849991994
+      }
+    },
+    "regression_combined_offline": {
+      "samples": 103,
+      "threshold": 1.0,
+      "attacks": 70,
+      "detected": 60,
+      "recall": 0.8571428571428571,
+      "benign": 33,
+      "false_positives": 2,
+      "false_positive_rate": 0.06060606060606061,
+      "suspicious": 0,
+      "suspicious_queued_or_blocked": 0,
+      "errors": 0,
+      "confusion": {
+        "malicious->malicious": 60,
+        "malicious->benign": 10,
+        "benign->benign": 31,
+        "benign->malicious": 2
+      },
+      "latency_ms": {
+        "p50": 17482.507618000454,
+        "p95": 27143.046288001642
+      }
+    },
+    "candidate_threads": 4,
+    "baseline_threads": 4,
+    "limitations": [
+      "Small synthetic held-out set with shared concepts; no production-distribution or independent human validation.",
+      "The regression inputs were previously inspected; not a new blind evaluation. Not used for training or threshold selection.",
+      "Combined decisions reuse archived semantic results; latency is an estimate.",
+      "Review failures are errors, not caught attacks. No real actions executed."
+    ]
+  },
+  "static": {
+    "generated_at": "2026-10-06T13:27:14.548Z",
+    "scope": "Static tool-response detection on InjecAgent; not official agent attack-success evaluation",
+    "dataset_url": "https://github.com/uiuc-kang-lab/InjecAgent",
+    "dataset_commit": "f19c9f2c79a41046eb13c03c51a24c567a8ffa07",
+    "mimori_commit": "9e3a1e8c1c3ce817c8b7a247afc89d1124c130ca",
+    "dataset_sha256": {
+      "test_cases_dh_base.json": "0a8186468d21389af432e8c7b399ae42264d1b93a07b65c7a489468508604305",
+      "test_cases_ds_base.json": "4daab35c62a3845e8b9400f4dca58b9c9f37e57cd33b2337552557fbb26282e9",
+      "test_cases_dh_enhanced.json": "885602716b72c18af80695ce6c2e1f242fa03163bc90b0788b0c5e4ab6216d50",
+      "test_cases_ds_enhanced.json": "7bc510868df032511053fc40e8470e68a041fb7148d055112093594bf73ab0ce",
+      "user_cases.jsonl": "c840e2b00fdce68e7142d0970220522303d67b2530d6fb36ef1112448cdd8977"
+    },
+    "source_sha256": {
+      "app/lib/detection/rules.ts": "b85f3b06813b542ba7b1d2b3813016c6e08d4a65ef38908ecdd41eff05b924ca",
+      "app/lib/detection/trigger.ts": "b91497687358d3ab3af157b9e3618eaab6c2a1d9478bade1115c2bc675293fff",
+      "app/lib/services/detection-service.ts": "5823490116d760f3a1201f25263820af826076ef9160a8e756af5e8126050cab",
+      "supabase/migrations/20261003000000_new_org_default_rules.sql": "bef8f44661d753d11ac12c7a4ca3c89411603606e7636bedb319fc203ae2c681",
+      "sdk/mimori/guardrail.py": "e8fa9cf0a76c80a28e043c5e05abe8993ca399306d06c37486496ddec7716360",
+      "scripts/benchmark-injecagent-sdk.py": "3de6e83fedc35f45bd1322a806d62ee5836608bab85a39c53eb70de91ff6ce7f",
+      "scripts/benchmark-injecagent.mjs": "78119b4939fd0265935e3796d017b1611890d2feff98db41fd1357d4f5e06282"
+    },
+    "environment": {
+      "node": "v24.19.0",
+      "platform": "linux",
+      "cpu": "12th Gen Intel(R) Core(TM) i5-1235U"
+    },
+    "limitations": [
+      "No agent actions, live API ingestion, database, Laya, or paid LLM judge were run.",
+      "Review-trigger coverage is routing only, not successful detection; random sampling is excluded.",
+      "17 controls are derived by removing the injection slot from tool templates, not a representative benign dataset.",
+      "Precision depends on this attack-heavy evaluation mix; control false-positive rate has very small support.",
+      "Base and enhanced are paired variants, not 2,108 independent attacks; there are 62 distinct base attack instructions combined with 17 tool templates.",
+      "Latency measures local detector calls only; no networking, persistence, judge execution, or end-to-end guardrail protection.",
+      "Only tool name and response content are scanned; attack labels and expected achievements are excluded."
+    ],
+    "engines": {
+      "new_org_rules": {
+        "rule_count": 12,
+        "settings": {
+          "base": {
+            "attacks": 1054,
+            "detected": 17,
+            "missed": 1037,
+            "recall": 0.016129032258064516,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": 1,
+            "missed_attacks_triggering_review": 1037,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.0276890000000094,
+              "p95": 0.04633799999999155,
+              "p99": 0.085062999999991
+            }
+          },
+          "enhanced": {
+            "attacks": 1054,
+            "detected": 1054,
+            "missed": 0,
+            "recall": 1,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": 1,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.02720899999997073,
+              "p95": 0.035807000000033895,
+              "p99": 0.04155400000001919
+            }
+          }
+        },
+        "base_by_attack_type": {
+          "Physical Harm": {
+            "attacks": 170,
+            "detected": 0,
+            "missed": 170,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 170,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.029009000000030483,
+              "p95": 0.0412939999999935,
+              "p99": 0.048672000000010485
+            }
+          },
+          "Financial Harm": {
+            "attacks": 153,
+            "detected": 0,
+            "missed": 153,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 153,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.03665000000000873,
+              "p95": 0.0778039999999578,
+              "p99": 0.15074099999998225
+            }
+          },
+          "Data Security Harm": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 187,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.028084999999975935,
+              "p95": 0.04548499999998512,
+              "p99": 0.0989099999999894
+            }
+          },
+          "Physical Data": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 187,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.027173000000004777,
+              "p95": 0.036869000000024243,
+              "p99": 0.04818999999997686
+            }
+          },
+          "Financial Data": {
+            "attacks": 102,
+            "detected": 0,
+            "missed": 102,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 102,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.02661900000003925,
+              "p95": 0.03529300000002422,
+              "p99": 0.038904999999999745
+            }
+          },
+          "Others": {
+            "attacks": 255,
+            "detected": 17,
+            "missed": 238,
+            "recall": 0.06666666666666667,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": 1,
+            "missed_attacks_triggering_review": 238,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.02590900000001284,
+              "p95": 0.035683000000005904,
+              "p99": 0.040406000000018594
+            }
+          }
+        }
+      },
+      "fallback_rules": {
+        "rule_count": 7,
+        "settings": {
+          "base": {
+            "attacks": 1054,
+            "detected": 0,
+            "missed": 1054,
+            "recall": 0,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": null,
+            "missed_attacks_triggering_review": 1054,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.019982000000027256,
+              "p95": 0.027963999999997213,
+              "p99": 0.03267699999997831
+            }
+          },
+          "enhanced": {
+            "attacks": 1054,
+            "detected": 1054,
+            "missed": 0,
+            "recall": 1,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": 1,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.022054000000025553,
+              "p95": 0.029361999999991895,
+              "p99": 0.03615100000001803
+            }
+          }
+        },
+        "base_by_attack_type": {
+          "Physical Harm": {
+            "attacks": 170,
+            "detected": 0,
+            "missed": 170,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 170,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.01933999999999969,
+              "p95": 0.028553000000044904,
+              "p99": 0.04259300000001076
+            }
+          },
+          "Financial Harm": {
+            "attacks": 153,
+            "detected": 0,
+            "missed": 153,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 153,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.019169999999974152,
+              "p95": 0.027793000000031043,
+              "p99": 0.03267699999997831
+            }
+          },
+          "Data Security Harm": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 187,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.019475999999997384,
+              "p95": 0.026394999999979518,
+              "p99": 0.028276000000005297
+            }
+          },
+          "Physical Data": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 187,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.02112299999998868,
+              "p95": 0.02875800000003892,
+              "p99": 0.031508000000030734
+            }
+          },
+          "Financial Data": {
+            "attacks": 102,
+            "detected": 0,
+            "missed": 102,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 102,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.021051999999997406,
+              "p95": 0.03031700000002502,
+              "p99": 0.03602200000000266
+            }
+          },
+          "Others": {
+            "attacks": 255,
+            "detected": 0,
+            "missed": 255,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 255,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.02018300000003137,
+              "p95": 0.0271720000000073,
+              "p99": 0.031239000000027772
+            }
+          }
+        }
+      },
+      "sdk_guardrail": {
+        "rule_count": 12,
+        "settings": {
+          "base": {
+            "attacks": 1054,
+            "detected": 0,
+            "missed": 1054,
+            "recall": 0,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.254664,
+              "p95": 0.399497,
+              "p99": 0.506533
+            }
+          },
+          "enhanced": {
+            "attacks": 1054,
+            "detected": 1054,
+            "missed": 0,
+            "recall": 1,
+            "controls": 17,
+            "false_positives": 0,
+            "false_positive_rate": 0,
+            "precision": 1,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 1,
+            "latency_ms": {
+              "p50": 0.171589,
+              "p95": 0.237651,
+              "p99": 0.272258
+            }
+          }
+        },
+        "base_by_attack_type": {
+          "Physical Harm": {
+            "attacks": 170,
+            "detected": 0,
+            "missed": 170,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.238625,
+              "p95": 0.38064,
+              "p99": 0.440887
+            }
+          },
+          "Financial Harm": {
+            "attacks": 153,
+            "detected": 0,
+            "missed": 153,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.225666,
+              "p95": 0.352532,
+              "p99": 0.413581
+            }
+          },
+          "Data Security Harm": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.238331,
+              "p95": 0.363451,
+              "p99": 0.427989
+            }
+          },
+          "Physical Data": {
+            "attacks": 187,
+            "detected": 0,
+            "missed": 187,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.270523,
+              "p95": 0.395755,
+              "p99": 0.447506
+            }
+          },
+          "Financial Data": {
+            "attacks": 102,
+            "detected": 0,
+            "missed": 102,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.281201,
+              "p95": 0.406493,
+              "p99": 0.430748
+            }
+          },
+          "Others": {
+            "attacks": 255,
+            "detected": 0,
+            "missed": 255,
+            "recall": 0,
+            "controls": 0,
+            "false_positives": 0,
+            "false_positive_rate": null,
+            "precision": null,
+            "missed_attacks_triggering_review": 0,
+            "detection_or_review_coverage": 0,
+            "latency_ms": {
+              "p50": 0.269244,
+              "p95": 0.472885,
+              "p99": 0.572196
+            }
+          }
+        }
+      }
+    }
+  },
+  "profiles": [
+    {
+      "name": "SDK regex only",
+      "engines": [
+        "regex"
+      ],
+      "true_positives": 0,
+      "false_positives": 2,
+      "false_negatives": 70,
+      "true_negatives": 31,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.0,
+      "false_positive_rate": 0.06060606060606061,
+      "precision": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.30097087378640774,
+      "scope": "individual detector evaluation"
+    },
+    {
+      "name": "Laya v0.3 only",
+      "engines": [
+        "laya"
+      ],
+      "true_positives": 1,
+      "false_positives": 1,
+      "false_negatives": 69,
+      "true_negatives": 32,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.014285714285714285,
+      "false_positive_rate": 0.030303030303030304,
+      "precision": 0.5,
+      "f1": 0.027777777777777776,
+      "accuracy": 0.32038834951456313,
+      "scope": "individual detector evaluation"
+    },
+    {
+      "name": "Llama semantic review",
+      "engines": [
+        "llm"
+      ],
+      "true_positives": 60,
+      "false_positives": 1,
+      "false_negatives": 10,
+      "true_negatives": 32,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.8571428571428571,
+      "false_positive_rate": 0.030303030303030304,
+      "precision": 0.9836065573770492,
+      "f1": 0.916030534351145,
+      "accuracy": 0.8932038834951457,
+      "scope": "individual detector evaluation"
+    },
+    {
+      "name": "Llama + Laya / OR",
+      "engines": [
+        "llm",
+        "laya"
+      ],
+      "true_positives": 60,
+      "false_positives": 2,
+      "false_negatives": 10,
+      "true_negatives": 31,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.8571428571428571,
+      "false_positive_rate": 0.06060606060606061,
+      "precision": 0.967741935483871,
+      "f1": 0.9090909090909091,
+      "accuracy": 0.883495145631068,
+      "scope": "offline OR replay"
+    },
+    {
+      "name": "Regex + Llama / OR",
+      "engines": [
+        "regex",
+        "llm"
+      ],
+      "true_positives": 60,
+      "false_positives": 3,
+      "false_negatives": 10,
+      "true_negatives": 30,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.8571428571428571,
+      "false_positive_rate": 0.09090909090909091,
+      "precision": 0.9523809523809523,
+      "f1": 0.9022556390977443,
+      "accuracy": 0.8737864077669902,
+      "scope": "offline OR replay"
+    },
+    {
+      "name": "Regex + Llama + Laya / OR",
+      "engines": [
+        "regex",
+        "llm",
+        "laya"
+      ],
+      "true_positives": 60,
+      "false_positives": 4,
+      "false_negatives": 10,
+      "true_negatives": 29,
+      "attacks": 70,
+      "benign": 33,
+      "recall": 0.8571428571428571,
+      "false_positive_rate": 0.12121212121212122,
+      "precision": 0.9375,
+      "f1": 0.8955223880597015,
+      "accuracy": 0.8640776699029126,
+      "scope": "offline OR replay"
+    }
+  ],
+  "training": {
+    "base_model": "convaiinnovations/laya",
+    "base_revision": "7b928d828b7b0e022f929d9bd2e44165aa270148",
+    "initial_checkpoint": ".private/laya-task-v0.2/checkpoint",
+    "initial_weights_sha256": "8cde91bf6c84d9d28d632520d0a6ae6e4cf035e419c01b3226aae301ca7adb62",
+    "question_ids": [
+      "verdict"
+    ],
+    "method": "supervised decision-head fine-tuning; frozen encoder; cached features",
+    "seed": 20261006,
+    "epochs": 4,
+    "steps": 192,
+    "losses": [
+      1.0323191011945407,
+      0.8823832472165426,
+      0.7506607767815391,
+      0.6428932659327984
+    ],
+    "checkpoint_selection": "minimum calibration cross-entropy",
+    "calibration_losses": [
+      0.9166680239140987,
+      0.8344033394629756,
+      0.8119090878559897,
+      0.9056432971265167
+    ],
+    "selected_epoch": 3,
+    "learning_rate": 0.0001,
+    "batch_size": 4,
+    "threads": 4,
+    "torch_version": "2.13.0+cpu",
+    "trained_parameters": 26248193,
+    "total_parameters": 421293827,
+    "seconds": 2013.02,
+    "temperature": [
+      1.1198703050613403,
+      1.1198703050613403,
+      1.1198703050613403
+    ],
+    "counts": {
+      "train": 192,
+      "calibration": 96,
+      "test": 96
+    },
+    "dataset_sha256": {
+      "train": "6688ff4e9a06c709318f8b7d7915f00efa5a8157854147459c26ba0ee51c1b40",
+      "calibration": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+      "test": "fcfe6babcafc2fe598ef5c4081137d46366214b6017905f034f3461348f1524d"
+    },
+    "experimental": true,
+    "trainer_sha256": "926f07b20bfeab24db87c718bfa8e1817fce53f193d939c31c24bf4883bc855e",
+    "dataset_manifest": {
+      "seed": 20261006,
+      "source": "Authored synthetic continued-training task pairs",
+      "counts": {
+        "train": 192,
+        "calibration": 96,
+        "test": 96
+      },
+      "sha256": {
+        "train": "6688ff4e9a06c709318f8b7d7915f00efa5a8157854147459c26ba0ee51c1b40",
+        "calibration": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+        "test": "fcfe6babcafc2fe598ef5c4081137d46366214b6017905f034f3461348f1524d"
+      },
+      "families": {
+        "train": [
+          "astronomy club",
+          "bird sanctuary",
+          "pottery class",
+          "aquarium",
+          "community kitchen",
+          "planetarium",
+          "farm stand",
+          "dance school",
+          "rowing club",
+          "botanical garden",
+          "print studio",
+          "bookbindery",
+          "textile studio",
+          "art residency",
+          "music rehearsal",
+          "climbing gym"
+        ],
+        "calibration": [
+          "orchard",
+          "food festival",
+          "puzzle club",
+          "cycling club",
+          "language class",
+          "woodwork class",
+          "sailing school",
+          "garden workshop"
+        ],
+        "test": [
+          "walking tour",
+          "science fair",
+          "ice rink",
+          "bakery",
+          "repair shop",
+          "film screening",
+          "craft market",
+          "tram depot"
+        ]
+      },
+      "split_method": "resource-disjoint; each split covers eight operation types",
+      "generator_sha256": "cebc6722f749173c90e35f1e62a7beaea27f3a87472ebcc97fc78d6253465026",
+      "limitations": [
+        "Synthetic labels by construction; no independent human review.",
+        "Resource families and selected surface forms differ; concepts remain shared.",
+        "No external benchmark cases used for training or calibration."
+      ]
+    }
+  },
+  "weights": {
+    "actual_decision_head_weights_changed": true,
+    "changed_tensors": [
+      "head.layers.0.linear1.bias",
+      "head.layers.0.linear1.weight",
+      "head.layers.0.linear2.bias",
+      "head.layers.0.linear2.weight",
+      "head.layers.0.norm1.bias",
+      "head.layers.0.norm1.weight",
+      "head.layers.0.norm2.bias",
+      "head.layers.0.norm2.weight",
+      "head.layers.0.self_attn.in_proj_bias",
+      "head.layers.0.self_attn.in_proj_weight",
+      "head.layers.0.self_attn.out_proj.bias",
+      "head.layers.0.self_attn.out_proj.weight",
+      "head.layers.1.linear1.bias",
+      "head.layers.1.linear1.weight",
+      "head.layers.1.linear2.bias",
+      "head.layers.1.linear2.weight",
+      "head.layers.1.norm1.bias",
+      "head.layers.1.norm1.weight",
+      "head.layers.1.norm2.bias",
+      "head.layers.1.norm2.weight",
+      "head.layers.1.self_attn.in_proj_bias",
+      "head.layers.1.self_attn.in_proj_weight",
+      "head.layers.1.self_attn.out_proj.bias",
+      "head.layers.1.self_attn.out_proj.weight",
+      "scorer.0.bias",
+      "scorer.0.weight",
+      "scorer.1.bias",
+      "scorer.1.weight",
+      "scorer.3.bias",
+      "scorer.3.weight",
+      "type_emb.weight"
+    ],
+    "frozen_encoder_and_action_head_identical": true,
+    "frozen_tensors_checked": 174,
+    "all_exported_tensors_finite": true,
+    "predeclared_sources_and_data_unchanged": true,
+    "checkpoint_selection_matches_minimum_calibration_loss": true,
+    "selected_epoch": 3,
+    "steps": 192,
+    "weights_sha256": "5a0f363017c4cb394b786a6b9ec7c8ec7aba48b29067d6a323d78665d293a6b4"
+  },
+  "scanner": {
+    "before_scanner_current_rules": {
+      "attacks": 20,
+      "detected": 12,
+      "benign": 16,
+      "false_positives": 0,
+      "latency_ms": {
+        "p50": 0.009622000000035769,
+        "p95": 2.999610999999959
+      }
+    },
+    "after_scanner_current_rules": {
+      "attacks": 20,
+      "detected": 20,
+      "benign": 16,
+      "false_positives": 0,
+      "latency_ms": {
+        "p50": 0.025148000000001502,
+        "p95": 5.405903000000023
+      }
+    }
+  },
+  "capabilities": {
+    "scope": "Task-scoped capability coverage of dataset proposed tool names, not agent ASR or prompt-injection recall",
+    "cases": 1054,
+    "cases_with_a_denied_proposed_attack_tool": 1054,
+    "cases_with_all_proposed_attack_tool_names_denied": 1053,
+    "cases_needing_same_tool_argument_checks": 1,
+    "original_calls_allowed": 1054,
+    "distinct_control_calls": 17,
+    "distinct_control_calls_allowed": 17,
+    "dataset_sha256": {
+      "test_cases_dh_base.json": "0a8186468d21389af432e8c7b399ae42264d1b93a07b65c7a489468508604305",
+      "test_cases_ds_base.json": "4daab35c62a3845e8b9400f4dca58b9c9f37e57cd33b2337552557fbb26282e9"
+    },
+    "policy_source_sha256": "c293ade08961f5c74e7343f5ce06c708042ba1a578b3d9712f4495ed6a5baf09",
+    "limitations": [
+      "Grant is supplied from the fixture's legitimate original tool and arguments; real applications must implement this task-scoped grant process.",
+      "No agent ran and no attack tools executed; attacker tool names come from dataset labels.",
+      "One case includes the authorized tool name as a first attack step. Its arguments need checking; the later email tool is denied.",
+      "A task requiring wider tool access needs wider grants; coverage may change."
+    ]
+  },
+  "provenance": {
+    "model": {
+      "name": "llama3.1:latest",
+      "model": "llama3.1:latest",
+      "modified_at": "2026-08-02T01:47:00.085978069+05:30",
+      "size": 4920753328,
+      "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "llama",
+        "families": [
+          "llama"
+        ],
+        "parameter_size": "8.0B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 131072,
+        "embedding_length": 4096
+      },
+      "capabilities": [
+        "completion",
+        "tools"
+      ]
+    },
+    "ollama": {
+      "version": "0.32.5"
+    },
+    "scope": "Fresh current-code static InjecAgent evaluation and live semantic subset regression",
+    "laya": "on hold; not evaluated",
+    "publication": "local only; no commit, push or leaderboard submission",
+    "detector_sha256": {
+      "sdk/mimori/guardrail.py": "e8fa9cf0a76c80a28e043c5e05abe8993ca399306d06c37486496ddec7716360",
+      "sdk/mimori/semantic.py": "edd4521b33d31d10f8f402f2a8a1a147ffe47b28ac68b6543d4f1a2b6940704e",
+      "app/lib/detection/rules.ts": "b85f3b06813b542ba7b1d2b3813016c6e08d4a65ef38908ecdd41eff05b924ca",
+      "app/lib/services/detection-service.ts": "5823490116d760f3a1201f25263820af826076ef9160a8e756af5e8126050cab"
+    }
+  },
+  "review_errors": 0,
+  "new_laya_attacks": [],
+  "new_laya_benign_blocks": [
+    "challenge-7"
+  ],
+  "source_sha256": {
+    "docs/benchmarks/run-20261006-132635/semantic/results.json": "2b6428c860fea8c947d39313520e23cef5e40a34c335ed6e429466e485a92b1e",
+    "docs/benchmarks/run-20261006-132635/semantic/cases.jsonl": "5543e55743b303b73ada92adfc1786c767ac00297777b23fd150acc83dd8d306",
+    "docs/benchmarks/run-20261006-132635/semantic/inputs.json": "8e65e33a92ec8e905b1a2c540a66a8d4f39a87dff1610292c4e037a29ff72cc3",
+    "docs/benchmarks/run-20261006-132635/semantic/raw-regex-comparison.json": "46b471b9467183b50b2f59a1b7d237d1c200ef886a4ff0ef8b5f58dd68e761bc",
+    "docs/benchmarks/run-20261006-132635/regex/results.json": "5b4529a74a0e18d52620047e0eda7bf15ef5c471f84a69258eb9e3004adfb6ca",
+    "docs/benchmarks/laya-task-v0.3/results.json": "26d0113c907e10ce8e2e67b8bcbf72dab93667275da7aaaf33a9cb4911f5717c",
+    "docs/benchmarks/laya-task-v0.3/regression.jsonl": "0db327c72a3b99f1c193c301556c75cc25285ae156c117ad4a429b43c7169cb0",
+    "docs/benchmarks/laya-task-v0.3/training-manifest.json": "58dc08ba5c2a3f99cd09e885607e4f6fd52ddf7739199dc5946f5ff738d7a5ec",
+    "docs/benchmarks/laya-task-v0.3/weight-verification.json": "9420666670cde097dba0230c0b0ef06364f2c02ea1ceed88605def7d66698a59",
+    "docs/benchmarks/laya-task-v0.3/policy.json": "96adeb412cd41731d1cbbd6db0c7433b75316043b66fc13e3454c221d342f160",
+    "docs/benchmarks/llm-regex-v2/regex-results.json": "09f22391568ace87ff3f54c857da60c427f3ec6fdb10579ef53b03c6afcf2660",
+    "docs/benchmarks/capabilities/results.json": "e938928223a1ea50b1115d71fdb049d491af6e5b7b257facd67b22ce65d58000"
+  },
+  "limitations": [
+    "The 103-case set was previously inspected. It is a regression, not a blind or production-distribution evaluation.",
+    "Overall recall mixes 62 public attacks with 8 authored attacks; public-only recall is reported separately.",
+    "No real agent attack actions ran. These results are not official InjecAgent ASR or a leaderboard rank.",
+    "Combined detector profiles are offline OR replays. The task-aware SDK path uses the supplied reviewer and does not apply raw regex.",
+    "Combined latency is a per-case sum of separately measured latencies, not a live latency or throughput measurement.",
+    "Regex enhanced cases contain an explicit override prefix. Base/enhanced share 62 instructions across 17 contexts.",
+    "Laya data are synthetic, resource-disjoint with shared concepts. Test cases never choose weights, temperature or threshold.",
+    "Precision, F1 and accuracy depend on this attack-heavy sample mix; benign sample sizes are small.",
+    "Capability audit assumes application-owned grants; it checks dataset-proposed tool names, not live agent attack prevention.",
+    "Laya v0.3 was not promoted for blocking: it adds no regression detections and one extra false positive."
+  ],
+  "sdk_smoke": {
+    "scope": "Local transport and SDK enforcement smoke; not model accuracy evidence",
+    "completed": true,
+    "runner_sha256": "f6fe448908ee7d0e04333cc9b3e74918d4bd960da2eb5f52868f8769ff0dff5c",
+    "semantic_model": "llama3.1:latest",
+    "policy_sha256": "96adeb412cd41731d1cbbd6db0c7433b75316043b66fc13e3454c221d342f160",
+    "sdk_sha256": {
+      "guardrail.py": "e8fa9cf0a76c80a28e043c5e05abe8993ca399306d06c37486496ddec7716360",
+      "laya_security.py": "fa4916bf6facca12865d960ae0ca14814463618c71d134d901230b751bad434c",
+      "semantic.py": "edd4521b33d31d10f8f402f2a8a1a147ffe47b28ac68b6543d4f1a2b6940704e"
+    },
+    "health": {
+      "status": "healthy",
+      "service": "mimori-laya-classifier",
+      "layer": "1.5",
+      "loaded_model": true,
+      "engine": "laya_finetuned",
+      "model_sha256": "5a0f363017c4cb394b786a6b9ec7c8ec7aba48b29067d6a323d78665d293a6b4",
+      "task_schema_version": "mimori.task_response.v1"
+    },
+    "missing_task_status": 400,
+    "token_truncation_refused_status": 503,
+    "wrong_checkpoint": {
+      "allowed": false,
+      "category": "evaluation_limit",
+      "severity": "high",
+      "reason": "Tool response could not be securely reviewed",
+      "matched_pattern": null
+    },
+    "laya_benign_fixture": {
+      "allowed": true,
+      "category": "benign",
+      "severity": "low",
+      "reason": "Laya did not exceed the experimental risk threshold",
+      "matched_pattern": null
+    },
+    "layered_benign_fixture": {
+      "allowed": true,
+      "category": "benign",
+      "severity": "low",
+      "reason": "Laya did not exceed the experimental risk threshold",
+      "matched_pattern": null
+    },
+    "layered_attack_fixture": {
+      "blocked_before_return": true,
+      "category": "instruction_override"
+    },
+    "layered_two_fixture_seconds": 115.48297989600178,
+    "limitations": [
+      "Two synthetic fixtures verify execution flow only; full detector results are reported separately.",
+      "Qualification is reported separately; this smoke does not enable the candidate by default."
+    ]
+  }
+}

@@ -60,6 +60,7 @@ class MIMORILangGraphHandler(MIMORIHandler, GraphCallbackHandler):
             agent_name=agent_name,
             api_url=api_url,
             session_id=session_id,
+            **kwargs,
         )
         # GraphCallbackHandler has no __init__ args in the fallback
 

@@ -21,6 +21,8 @@
 ## Operate and contribute
 
 - [Security architecture](security-architecture.md)
+- [Tool-response review and task-scoped authorization](tool-response-security.md)
+- [Task-aware Laya training and calibration](laya-task-training.md)
 - [Telemetry, retention, and privacy](telemetry-best-practices.md)
 - [Crash recovery, replay, and backup/restore checks](durability.md)
 - [Judge prompts and worker execution](judge-prompts.md)

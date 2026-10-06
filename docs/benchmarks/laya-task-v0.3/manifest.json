@@ -1,0 +1,19 @@
+{
+  "sha256": {
+    "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/evaluate_task.py": "cff3f372ec7ce31e46e5feb21881915aa06d238ed5a19dca0ea827835d90b52e",
+    "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/serve.py": "9fd27fdabee90c9b4539ed8373734b77dfcf6c0bf5cad53ea54f3039cea5f486",
+    "/home/p4nda/Desktop/projs/MIMORI/scripts/laya/task_schema.py": "4f8b6e0f804b93b7f6e389aa4f79d9610a73ed3ae22b70f440af4fa8ae36d2ca",
+    ".private/laya-task-v0.3/data-final/train.jsonl": "6688ff4e9a06c709318f8b7d7915f00efa5a8157854147459c26ba0ee51c1b40",
+    ".private/laya-task-v0.3/data-final/calibration.jsonl": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+    ".private/laya-task-v0.3/data-final/test.jsonl": "fcfe6babcafc2fe598ef5c4081137d46366214b6017905f034f3461348f1524d",
+    ".private/laya-task-v0.3/data-final/manifest.json": "2dd54e0406b01c165fbea0a82a422c1f4e5dfc0b54cd93293503b921d3ca326d",
+    ".private/laya-task-v0.3/checkpoint/model.safetensors": "5a0f363017c4cb394b786a6b9ec7c8ec7aba48b29067d6a323d78665d293a6b4",
+    ".private/laya-task-v0.3/checkpoint/training-manifest.json": "58dc08ba5c2a3f99cd09e885607e4f6fd52ddf7739199dc5946f5ff738d7a5ec",
+    ".private/laya-task-v0.3/checkpoint/task-schema.json": "b47cf6e162fa2dbcfb1d06d4b7e9a07039ba63dad3508c61ee66a45d17216339",
+    "docs/benchmarks/run-20261006-132635/semantic/inputs.json": "8e65e33a92ec8e905b1a2c540a66a8d4f39a87dff1610292c4e037a29ff72cc3",
+    "docs/benchmarks/run-20261006-132635/semantic/cases.jsonl": "5543e55743b303b73ada92adfc1786c767ac00297777b23fd150acc83dd8d306",
+    ".private/laya-task-v0.2/checkpoint/model.safetensors": "8cde91bf6c84d9d28d632520d0a6ae6e4cf035e419c01b3226aae301ca7adb62"
+  },
+  "threads": 4,
+  "max_calibration_fp_rate": 0.05
+}

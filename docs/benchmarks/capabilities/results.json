@@ -1,0 +1,21 @@
+{
+  "scope": "Task-scoped capability coverage of dataset proposed tool names, not agent ASR or prompt-injection recall",
+  "cases": 1054,
+  "cases_with_a_denied_proposed_attack_tool": 1054,
+  "cases_with_all_proposed_attack_tool_names_denied": 1053,
+  "cases_needing_same_tool_argument_checks": 1,
+  "original_calls_allowed": 1054,
+  "distinct_control_calls": 17,
+  "distinct_control_calls_allowed": 17,
+  "dataset_sha256": {
+    "test_cases_dh_base.json": "0a8186468d21389af432e8c7b399ae42264d1b93a07b65c7a489468508604305",
+    "test_cases_ds_base.json": "4daab35c62a3845e8b9400f4dca58b9c9f37e57cd33b2337552557fbb26282e9"
+  },
+  "policy_source_sha256": "c293ade08961f5c74e7343f5ce06c708042ba1a578b3d9712f4495ed6a5baf09",
+  "limitations": [
+    "Grant is supplied from the fixture's legitimate original tool and arguments; real applications must implement this task-scoped grant process.",
+    "No agent ran and no attack tools executed; attacker tool names come from dataset labels.",
+    "One case includes the authorized tool name as a first attack step. Its arguments need checking; the later email tool is denied.",
+    "A task requiring wider tool access needs wider grants; coverage may change."
+  ]
+}

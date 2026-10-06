@@ -1,0 +1,61 @@
+{
+  "seed": 20261006,
+  "source": "Authored synthetic continued-training task pairs",
+  "counts": {
+    "train": 192,
+    "calibration": 96,
+    "test": 96
+  },
+  "sha256": {
+    "train": "6688ff4e9a06c709318f8b7d7915f00efa5a8157854147459c26ba0ee51c1b40",
+    "calibration": "6ee96877f2cbfe6e7c9dd8574f7bf764fe8eb367e8063c1bc293eb1775ecb40a",
+    "test": "fcfe6babcafc2fe598ef5c4081137d46366214b6017905f034f3461348f1524d"
+  },
+  "families": {
+    "train": [
+      "astronomy club",
+      "bird sanctuary",
+      "pottery class",
+      "aquarium",
+      "community kitchen",
+      "planetarium",
+      "farm stand",
+      "dance school",
+      "rowing club",
+      "botanical garden",
+      "print studio",
+      "bookbindery",
+      "textile studio",
+      "art residency",
+      "music rehearsal",
+      "climbing gym"
+    ],
+    "calibration": [
+      "orchard",
+      "food festival",
+      "puzzle club",
+      "cycling club",
+      "language class",
+      "woodwork class",
+      "sailing school",
+      "garden workshop"
+    ],
+    "test": [
+      "walking tour",
+      "science fair",
+      "ice rink",
+      "bakery",
+      "repair shop",
+      "film screening",
+      "craft market",
+      "tram depot"
+    ]
+  },
+  "split_method": "resource-disjoint; each split covers eight operation types",
+  "generator_sha256": "cebc6722f749173c90e35f1e62a7beaea27f3a87472ebcc97fc78d6253465026",
+  "limitations": [
+    "Synthetic labels by construction; no independent human review.",
+    "Resource families and selected surface forms differ; concepts remain shared.",
+    "No external benchmark cases used for training or calibration."
+  ]
+}

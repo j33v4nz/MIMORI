@@ -1,7 +1,7 @@
 import { createSupabaseServiceClient } from "../db/service";
 import { getTelemetryEnv } from "../env";
 import { detectWithRules, compileRules, payloadToSearchText, type Rule, type CompiledRule } from "../detection/rules";
-import { shouldQueueForLlmJudge } from "../detection/trigger";
+import { shouldQueueForLlmJudge, isToolResponse } from "../detection/trigger";
 import { dispatchThreatAlert } from "../alerts";
 import type { ImmediateDetection } from "../types";
 import { getLayaConfig, classifyWithLaya, shouldAutoDetect, shouldQueueForJudge } from "../detection/laya";
@@ -24,6 +24,7 @@ export interface PersistedEvent {
   sequence_number: number;
   payload: Record<string, unknown>;
   created_at: string;
+  event_type?: string;
 }
 
 export interface DetectionInsert {
@@ -47,7 +48,7 @@ const FALLBACK_DEFAULT_RULES: Rule[] = [
   {
     id: "00000000-0000-0000-0000-000000000001",
     name: "Database Destruction & SQL Injection",
-    pattern: "(?i)\\b(UNION\\s+SELECT|DROP\\s+TABLE|TRUNCATE\\s+TABLE|ALTER\\s+TABLE|OR\\s+1=1|--;\\s*EXEC|WAITFOR\\s+DELAY|BENCHMARK\\s*\\(|SLEEP\\s*\\()\\b",
+    pattern: "(?i)\\b(UNION\\s+SELECT|DROP\\s+TABLE|TRUNCATE\\s+TABLE|ALTER\\s+TABLE|OR\\s+1\\s*=\\s*1|--;\\s*EXEC|WAITFOR\\s+DELAY)\\b|\\b(?:BENCHMARK|SLEEP)\\s*\\(",
     pattern_type: "regex",
     category: "threat",
     severity: "critical",
@@ -56,7 +57,7 @@ const FALLBACK_DEFAULT_RULES: Rule[] = [
   {
     id: "00000000-0000-0000-0000-000000000002",
     name: "Prompt Injection & Instruction Override",
-    pattern: "(?i)(ignore|disregard|forget|bypass)\\s+(all\\s+)?(previous|prior|above|system)\\s+(instructions|prompts|rules|guidelines)",
+    pattern: "(?i)(ignore|disregard|forget|override|bypass|disable)\\s+(all\\s+)?(your\\s+|these\\s+|those\\s+)?(previous|prior|above|system|earlier|original)\\s+(instructions?|prompts?|messages?|directives?|constraints?|polic(y|ies)|guidelines?|rules?)",
     pattern_type: "regex",
     category: "instruction_override",
     severity: "high",
@@ -74,7 +75,7 @@ const FALLBACK_DEFAULT_RULES: Rule[] = [
   {
     id: "00000000-0000-0000-0000-000000000004",
     name: "Excessive Agency & Remote Command Execution",
-    pattern: "(?i)\\b(rm\\s+-rf\\s+[/~]|mkfs\\.[a-z0-9]+|chmod\\s+-R\\s+777|dd\\s+if=/dev/(zero|urandom)|nc\\s+-e\\s+/bin/sh|/bin/(bash|sh)\\s+-i)\\b",
+    pattern: "(?i)\\b(rm\\s+(-[a-zA-Z]{0,64}r[a-zA-Z]{0,64}f[a-zA-Z]{0,64}|-[a-zA-Z]{0,64}f[a-zA-Z]{0,64}r[a-zA-Z]{0,64}|-r\\s+-f|-f\\s+-r|--recursive|--force)\\s+(--\\s+)?[/~.]|mkfs\\.[a-z0-9]+|chmod\\s+-R\\s+777|dd\\s+if=/dev/(zero|urandom)|nc\\s+-e\\s+/bin/sh|/bin/(bash|sh)\\s+-i)|\\b(curl|wget)\\b[^|\\n]{0,2000}\\|\\s*(sh|bash|zsh|dash)\\b",
     pattern_type: "regex",
     category: "excessive_agency",
     severity: "critical",
@@ -194,7 +195,7 @@ export async function processDetections(
   for (const event of persistedEvents) {
     const { _mimori_security: reportedSignals, ...payload } = event.payload;
     const text = payloadToSearchText(payload);
-    const detections = detectWithRules(payload, rules, text);
+    const detections = detectWithRules(payload, rules);
     const parsedSignals = securitySignalsSchema.safeParse(reportedSignals);
     if (parsedSignals.success) {
       for (const signal of new Set(parsedSignals.data.signals)) {
@@ -229,6 +230,12 @@ export async function processDetections(
 
     // Layer 1.5: Laya classifier (when enabled, replaces trigger terms + random sampling)
     if (detections.length === 0) {
+      // A confident local classifier must not suppress trust-boundary review.
+      // This queues review only; asynchronous telemetry is not a blocking gate.
+      if (isToolResponse(payload, event.event_type)) {
+        llmJudgeRows.push({ event_id: event.id, org_id: orgId, status: "pending" });
+        continue;
+      }
       const { enabled: layaEnabled, config: layaConfig } = getLayaConfig();
 
       if (layaEnabled) {
