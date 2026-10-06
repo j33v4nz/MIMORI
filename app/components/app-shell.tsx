@@ -160,7 +160,7 @@ export function AppShell({
             </form>
           )}
           <div className="text-[10px] font-mono text-secondary/60 uppercase tracking-widest pt-1 px-3">
-            MIMORI · EARLY RELEASE
+            MIMORI · v1.1.0
           </div>
         </div>
       </aside>
@@ -338,7 +338,7 @@ export function AppShell({
           {/* Architectural Footer */}
           <footer className="mt-16 pt-6 pb-8 flex flex-col sm:flex-row justify-between items-center w-full border-t border-outline-variant/60 bg-transparent text-secondary text-xs gap-4">
             <span className="font-mono text-[11px] uppercase tracking-wider text-secondary font-semibold">
-              © 2026 MIMORI OSS. EARLY RELEASE
+              © 2026 MIMORI OSS. v1.1.0
             </span>
             <div className="flex gap-4 items-center">
               <Link

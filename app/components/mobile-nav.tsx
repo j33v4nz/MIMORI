@@ -122,7 +122,7 @@ export function MobileNav() {
                   />
                 </div>
               </div>
-              <span className="font-data-mono text-[9px] text-secondary uppercase tracking-widest">MIMORI · EARLY RELEASE</span>
+              <span className="font-data-mono text-[9px] text-secondary uppercase tracking-widest">MIMORI · v1.1.0</span>
             </div>
           </div>
         </>, document.body

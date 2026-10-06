@@ -8,7 +8,7 @@
 
 MIMORI is an open-source, self-hosted security and behavior review platform for AI agents across frameworks and custom runtimes. Record tool activity, review findings, and compare execution sessions before releasing a change. Its common telemetry API works independently of the framework running your agent.
 
-**Early release / public beta.** Findings are review signals. Coverage depends on instrumentation and configuration; a clear comparison does not certify safety.
+**v1.1.0** Findings are review signals. Coverage depends on instrumentation and configuration; a clear comparison does not certify safety.
 
 [Quickstart](#quickstart) · [Integrations](docs/integrations.md) · [Documentation](docs/README.md) · [Python SDK](sdk/README.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
