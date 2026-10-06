@@ -42,7 +42,7 @@ Prompt injection cannot be solved with a single regex or a single classifier. MI
 3. **Deterministic Capability Sandboxing:** Mathematical least-privilege boundary at tool execution. Even if an injection slips past all text classifiers, unauthorized tool calls are physically blocked.
 
 <p align="center">
-  <img src="docs/benchmarks/social-review-20261006/mimori-frontier-benchmark.png" alt="MIMORI Security Benchmark" width="900" />
+  <img src="public/mimori-frontier-benchmark.png" alt="MIMORI Security Benchmark" width="900" />
 </p>
 
 | Benchmark & Capability Suite | MIMORI (Full Stack) | Llama 3.1 (Semantic Alone) | Regex Scanner |
@@ -54,7 +54,7 @@ Prompt injection cannot be solved with a single regex or a single classifier. MI
 | **Benign Tool Specificity (1 - FPR)** | **• 97.0%** | 97.0% | 93.9% |
 | **Runtime Execution Reliability** | **• 100%** (0 errors) | 100% | 100% |
 
-*Tested on frozen InjecAgent regression (`uiuc-kang-lab/InjecAgent`, rev `f19c9f2c`) with local CPU inference. See the [Full Benchmark Review](docs/benchmarks/social-review-20261006/full-review.md) and [Tool Response Security Guide](docs/tool-response-security.md).*
+*Tested on frozen InjecAgent regression (`uiuc-kang-lab/InjecAgent`, rev `f19c9f2c`) with local CPU inference. See the [Tool Response Security Guide](docs/tool-response-security.md).*
 
 ## What you can do
 
